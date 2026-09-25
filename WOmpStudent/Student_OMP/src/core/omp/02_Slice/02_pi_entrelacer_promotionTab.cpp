@@ -38,14 +38,11 @@ namespace PI::OMP::entrelacement
             while (slice < n)
                 {
 
-                for (int i = 0; i < n; i++)
-                    {
-                    x_slice = slice * dx;
-                    thread_sum += f(x_slice);
-                    }
+                x_slice = slice * dx;
+                thread_sum += f(x_slice);
 
                 slice += NB_THREAD;
-                };
+                }
 
             thread_array[tid] = thread_sum;
             }
@@ -59,7 +56,7 @@ namespace PI::OMP::entrelacement
 
         return sum * dx;
 
-        } // namespace PI::OMP::entrelacement
+        } // promotionTab
 
     } // namespace PI::OMP::entrelacement
 
