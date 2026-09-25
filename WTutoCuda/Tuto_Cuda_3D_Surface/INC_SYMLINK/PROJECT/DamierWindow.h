@@ -1,0 +1,1 @@
+/home/bilat/CBI/Dropbox/02_CBI_LINUX/CoursCuda/toStudent/code/WTutoCuda/Tuto_Cuda_3D_Surface/src/core/02_highmap_domaine/a_damier_RGBA_uchar4/provider/DamierWindow.h

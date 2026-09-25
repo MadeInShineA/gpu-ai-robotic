@@ -1,0 +1,1 @@
+/opt/cbi/make/006/private/api/version/bilat_backend_tp_version.mk

@@ -1,0 +1,29 @@
+{
+    "configurations": [
+        {
+            "name": "Linux-C++-OMP",
+            "compilerPath": "/usr/bin/g++",
+            //
+            //  includePath
+            //
+            "includePath": [
+                "${workspaceFolder}/src/**", // ** -> recursive include path
+                "${workspaceFolder}/INC_SYMLINK/EXT",
+                "${workspaceFolder}/INC_SYMLINK/PROJECT"
+                //"/usr/lib/gcc/x86_64-linux-gnu/**" ** -> recursive include path
+            ],
+            "compilerArgs": [
+                "-fopenmp"
+                //"-Wall"
+                //"-Wunused-variable"
+            ],
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "linux-gcc-x64",
+            "defines": [
+                "_OPENMP" //  Enable IntelliSense support for OpenMP (#include <omp.h> and OpenMP symbols)
+            ]
+        }
+    ],
+    "version": 4
+}

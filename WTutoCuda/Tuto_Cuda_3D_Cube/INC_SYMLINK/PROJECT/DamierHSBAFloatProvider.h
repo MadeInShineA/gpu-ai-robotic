@@ -1,0 +1,1 @@
+/home/bilat/CBI/Dropbox/02_CBI_LINUX/CoursCuda/toStudent/code/WTutoCuda/Tuto_Cuda_3D_Cube/../Tuto_Cuda_Image/src/core/02_simple_type/03_Damier_HSBA_float4/02_provider/DamierHSBAFloatProvider.h

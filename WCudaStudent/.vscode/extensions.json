@@ -1,0 +1,13 @@
+{
+    //
+    // code --list-extensions
+    // code --list-extensions --show-versions
+    // 
+    "recommendations": [
+        "ms-vscode.cpptools",
+        "ms-vscode.cpptools-themes",
+        "NVIDIA.nsight-vscode-edition"
+        // 
+        //"ms-vscode-remote.remote-ssh"
+    ]
+}

@@ -1,0 +1,1 @@
+/home/bilat/CBI/Dropbox/02_CBI_LINUX/CoursCuda/toStudent/code/WTutoCuda/Tuto_Cuda_3D_Cube/src/core/scene/SceneCubeCreator.h

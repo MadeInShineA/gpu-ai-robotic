@@ -1,0 +1,315 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        //
+        // cbicc cuda clean 
+        //
+        {
+            "label": "cbicc cuda clean",
+            "type": "shell",
+            "command": "cbicc cuda clean",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "presentation": {
+                "clear": true, // Before executing the task, VS Code clears the previous terminal content.
+                "reveal": "always", // Always opens the terminal when the task starts.
+                "panel": "dedicated" // "shared" / "dedicated": "shared" -> all tasks use the same terminal.
+            },
+            "group": "build"
+        }, // cbicc cuda clean 
+        //
+        // cbicc cuda jall
+        //
+        {
+            "label": "cbicc cuda jall",
+            "type": "shell",
+            "command": "cbicc cuda jall",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "presentation": {
+                "clear": true, // Before executing the task, VS Code clears the previous terminal content.
+                "reveal": "always", // Always opens the terminal when the task starts.
+                "panel": "dedicated" // "shared" / "dedicated": "shared" -> all tasks use the same terminal.
+            },
+            "group": "build",
+            "problemMatcher": {
+                "owner": "cbicc-compiler",
+                "fileLocation": [
+                    "relative",
+                    "${workspaceFolder}"
+                ],
+                "pattern": {
+                    "regexp": "^(.+):(\\d+):(\\d+):\\s+(error|warning):\\s+(.*)$", // avec warning//
+                    // "regexp": "^(.+):(\\d+):(\\d+):\\s*(error):\\s+(.*)$", // san warning
+                    "file": 1,
+                    "line": 2,
+                    "column": 3,
+                    "severity": 4,
+                    "message": 5
+                }
+            }
+        }, // end cbicc cuda jall 
+        //
+        // cbicc cuda run 
+        //
+        {
+            "label": "cbicc cuda run",
+            "type": "shell",
+            "command": "cbicc cuda run",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "presentation": {
+                "clear": true, // Before executing the task, VS Code clears the previous terminal content.
+                "reveal": "always", // Always opens the terminal when the task starts.
+                "panel": "dedicated" // "shared" / "dedicated": "shared" -> all tasks use the same terminal.
+            },
+            "group": "build"
+        }, // cbicc cuda run 
+        //
+        // cbicc cuda runGL
+        //
+        {
+            "label": "cbicc cuda runGL",
+            "type": "shell",
+            "command": "cbicc cuda runGL",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "presentation": {
+                "clear": true, // Before executing the task, VS Code clears the previous terminal content.
+                "reveal": "always", // Always opens the terminal when the task starts.
+                "panel": "dedicated" // "shared" / "dedicated": "shared" -> all tasks use the same terminal.
+            },
+            "group": "build"
+        }, // cbicc cuda run GL
+        //
+        // cbicc cuda clean jall
+        //
+        {
+            "label": "cbicc cuda clean jall",
+            "type": "shell",
+            "dependsOn": [
+                "cbicc cuda clean",
+                "cbicc cuda jall"
+            ],
+            "dependsOrder": "sequence",
+            "group": "build"
+        }, // end cbicc cuda clean jall
+        //
+        // cbicc cuda clean jall run
+        //
+        {
+            "label": "cbicc cuda clean jall run",
+            "type": "shell",
+            "dependsOn": [
+                "cbicc cuda clean",
+                "cbicc cuda jall",
+                "cbicc cuda run"
+            ],
+            "dependsOrder": "sequence",
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            }
+        }, // end cbicc cuda clean jall run
+        //
+        // cbicc cuda clean jall runGL
+        //
+        {
+            "label": "cbicc cuda clean jall runGL",
+            "type": "shell",
+            "dependsOn": [
+                "cbicc cuda clean",
+                "cbicc cuda jall",
+                "cbicc cuda runGL"
+            ],
+            "dependsOrder": "sequence",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }, // end cbicc cuda clean jall runGL
+        //
+        // cbicc cuda kill
+        //
+        {
+            "label": "cbicc cuda kill",
+            "type": "shell",
+            "command": "cbicc cuda kill",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "presentation": {
+                "clear": true, // Before executing the task, VS Code clears the previous terminal content.
+                "reveal": "always", // Always opens the terminal when the task starts.
+                "panel": "dedicated" // "shared" / "dedicated": "shared" -> all tasks use the same terminal.
+            },
+            "group": "build"
+        }, // end cbicc cuda kill
+        //
+        // --------------------------------------------------------
+        // Tools  
+        // --------------------------------------------------------
+        //
+        // cbicc cuda dependenciesLinux
+        //
+        {
+            "label": "cbicc cuda dependenciesLinux",
+            "type": "shell",
+            "command": "cbicc cuda dependenciesLinux",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "presentation": {
+                "clear": true, // Before executing the task, VS Code clears the previous terminal content.
+                "reveal": "always", // Always opens the terminal when the task starts.
+                "panel": "dedicated" // "shared" / "dedicated": "shared" -> all tasks use the same terminal.
+            },
+            "group": "build"
+        }, // end cbicc cuda dependenciesLinux
+        //
+        // cbicc cuda runMemcheck
+        //
+        {
+            "label": "cbicc cuda runMemcheck",
+            "type": "shell",
+            "command": "cbicc cuda runMemcheck",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "presentation": {
+                "clear": true, // Before executing the task, VS Code clears the previous terminal content.
+                "reveal": "always", // Always opens the terminal when the task starts.
+                "panel": "dedicated" // "shared" / "dedicated": "shared" -> all tasks use the same terminal.
+            },
+            "group": "build"
+        }, // end cbicc cuda runMemcheck
+        //
+        // gl cbicc cuda runMemcheck
+        //
+        {
+            "label": "cbicc cuda runMemcheck GL",
+            "type": "shell",
+            "command": "gl cbicc cuda runMemcheck",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "presentation": {
+                "clear": true, // Before executing the task, VS Code clears the previous terminal content.
+                "reveal": "always", // Always opens the terminal when the task starts.
+                "panel": "dedicated" // "shared" / "dedicated": "shared" -> all tasks use the same terminal.
+            },
+            "group": "build"
+        }, // end cbicc cuda runMemcheck GL
+        //
+        // cbicc gcc symlinkExtInc
+        //
+        {
+            "label": "cbicc gcc symlinkExtInc",
+            "type": "shell",
+            "command": "cbicc gcc symlinkExtInc",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "presentation": {
+                "clear": true, // Before executing the task, VS Code clears the previous terminal content.
+                "reveal": "always", // Always opens the terminal when the task starts.
+                "panel": "dedicated" // "shared" / "dedicated": "shared" -> all tasks use the same terminal.
+            },
+            "group": "build"
+        }, // end ccbicc gcc symlinkExtInc
+        //
+        // cbicc cuda package
+        //
+        {
+            "label": "cbicc cuda package",
+            "type": "shell",
+            "command": "cbicc cuda package",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "presentation": {
+                "clear": true, // Before executing the task, VS Code clears the previous terminal content.
+                "reveal": "always", // Always opens the terminal when the task starts.
+                "panel": "dedicated" // "shared" / "dedicated": "shared" -> all tasks use the same terminal.
+            },
+            "group": "build"
+        }, // end cbicc cuda package 
+        //
+        // cbicc cuda packageRun
+        //
+        {
+            "label": "cbicc cuda packageRun",
+            "type": "shell",
+            "command": "cbicc cuda packageRun",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "presentation": {
+                "clear": true, // Before executing the task, VS Code clears the previous terminal content.
+                "reveal": "always", // Always opens the terminal when the task starts.
+                "panel": "dedicated" // "shared" / "dedicated": "shared" -> all tasks use the same terminal.
+            },
+            "group": "build"
+        }, // end cbicc cuda packageRun 
+        //
+        // --------------------------------------------------------
+        // Debug  
+        // --------------------------------------------------------
+        //
+        //  current folder (debug)
+        //
+        {
+            "label": "ls",
+            "type": "shell",
+            "command": "pwd; ls -la",
+            "options": {
+                "cwd": "${fileWorkspaceFolder}" // fileWorkspaceFolder workspaceFolder
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated"
+            }
+        }, // end current folder 
+        //
+        // --------------------------------------------------------
+        // Tasks  
+        // --------------------------------------------------------
+        //
+        //  format current file
+        //
+        {
+            "label": "format current file",
+            "type": "shell",
+            "command": "clang-format -i \"${file}\"", // sudo apt install clang-format
+        }, // end format current file
+        //
+        //  format all file
+        //
+        {
+            "label": "format all files",
+            "type": "shell",
+            "command": "find . -type f \\( -name '*.cpp' -o -name '*.h' -o -name '*.hpp' -o -name '*.cu' -o -name '*.cu.h' \\) -exec clang-format -i {} +", // sudo apt install clang-format
+            "problemMatcher": []
+        }, // end format all file
+        //
+        // cockpit
+        //
+        {
+            "label": "cockpit",
+            "type": "shell",
+            //"command": "nohup cockpit", // nohup ou disown : Empêche le processus d'être tué lorsque le terminal parent se ferme. > /dev/null 2>&1 : Cache les logs textuels pour éviter de polluer VS Code.
+            "command": "nohup cockpit  > /dev/null 2>&1",
+            //"isBackground": false,
+            "presentation": {
+                "clear": true, // Before executing the task, VS Code clears the previous terminal content.
+                "reveal": "always", // Always opens the terminal when the task starts.
+                "panel": "dedicated" // "shared" / "dedicated": "shared" -> all tasks use the same terminal.
+            },
+            "group": "build"
+        } // end cockpit
+    ] // end tasks
+}

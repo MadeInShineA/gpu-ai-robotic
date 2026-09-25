@@ -1,0 +1,1 @@
+/home/bilat/CBI/Dropbox/02_CBI_LINUX/CoursCuda/toStudent/code/WCudaStudent/Student_Cuda_Video/src/core/01_WARMUP/d_surface_cuarray/03_provider/VideoSurfaceProvider.h

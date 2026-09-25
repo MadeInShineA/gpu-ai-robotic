@@ -1,0 +1,1 @@
+/opt/cbi/make/006/private/cpp/mingw.mk

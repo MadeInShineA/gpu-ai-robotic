@@ -1,0 +1,53 @@
+{
+    //
+    // format (see .clang-format file)
+    //
+    "C_Cpp.formatting": "clangFormat",
+    "editor.formatOnSave": true,
+    "files.autoSave": "afterDelay",
+    "files.autoSaveDelay": 1000,
+    // 
+    // IntelliSense
+    //
+    "C_Cpp.intelliSenseEngine": "default", //  Enable the IntelliSense semantic engine ("default" / "disabled")
+    "C_Cpp.errorSquiggles": "enabled", // Squiggles (soulignements d'erreurs) IntelliSense ("enabled" / "disabled")
+    //
+    // code completion
+    //
+    "C_Cpp.autocompleteAddParentheses": true,
+    "editor.autoClosingBrackets": "always",
+    "editor.parameterHints.enabled": true,
+    "editor.suggest.snippetsPreventQuickSuggestions": false,
+    "editor.suggest.preview": true,
+    "editor.suggestSelection": "recentlyUsedByPrefix",
+    "editor.inlayHints.enabled": "on",
+    "editor.quickSuggestions": {
+        "comments": false,
+        "strings": false,
+        "other": true
+    },
+    //
+    // Chat
+    //
+    "workbench.secondarySideBar.defaultVisibility": "hidden",
+    "chat.disableAIFeatures": false,
+    //
+    // file associations
+    //
+    "files.associations": {
+        "*.h": "cpp",
+        "*.cpp.h": "cpp",
+        "*.cu": "cuda-cpp",
+        "*.cu.h": "cuda-cpp"
+    },
+    //
+    // cuda
+    //
+    "[cuda-cpp]": {
+        "editor.wordBasedSuggestions": "off", // Prefer IntelliSense suggestions over words found in the current file.
+        "editor.semanticHighlighting.enabled": true,
+        //"editor.stickyScroll.defaultModel": "foldingProviderModel",
+        "editor.suggest.insertMode": "replace"
+    }
+    //"json.schemaDownload.enable": false // Avoid conflict between downloaded JSON schemas (tasks.json) and VS Code built-in schemas
+}

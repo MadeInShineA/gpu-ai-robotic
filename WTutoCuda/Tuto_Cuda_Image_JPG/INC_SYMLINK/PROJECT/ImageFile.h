@@ -1,0 +1,1 @@
+/home/bilat/CBI/Dropbox/02_CBI_LINUX/CoursCuda/toStudent/code/WTutoCuda/Tuto_Cuda_Image_JPG/src/core/01_imageVideo/01_animable/host/ImageFile.h

@@ -1,0 +1,1 @@
+/home/bilat/CBI/Dropbox/02_CBI_LINUX/CoursCuda/toStudent/code/WTutoCuda/Tuto_Cuda_3D_Cube/../Tuto_Cuda_Image/src/core/03_advanced/04_opengl_pure/01_opengl/MyDisplayable.h

@@ -1,0 +1,1 @@
+/opt/cbi/make/006/private/script/workspace_auto/workspace_doc.sh

@@ -1,0 +1,1 @@
+/home/bilat/CBI/Dropbox/02_CBI_LINUX/CoursCuda/toStudent/code/WCudaStudent/Student_Cuda/src/core/01_student/04_Montecarlo/01_mono_gpu/host/Montecarlo_BestGrid.h

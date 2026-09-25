@@ -1,0 +1,43 @@
+{
+    "configurations": [
+        {
+            "name": "Linux-CUDA-OMP",
+            //
+            //  includePath
+            //
+            "includePath": [
+                "${workspaceFolder}/src/**", // ** -> recursive include path
+                "/usr/local/cuda/include",
+                "${workspaceFolder}/INC_SYMLINK/EXT",
+                "${workspaceFolder}/../Student_Cuda_Tools_Reduction/src/core/**", // ** -> recursive include path
+                //"/opt/api/ext/opencv/480/include/opencv4/opencv2/**", // ** -> recursive include path
+                "/opt/api/ext/opencv/480/include/opencv4/**" // ** -> recursive include path
+                //"/usr/lib/gcc/x86_64-linux-gnu/**"
+            ],
+            //
+            //  Use nvcc for IntelliSense parsing to correctly recognize CUDA syntax 
+            //
+            "compilerPath": "/usr/local/cuda/bin/nvcc",
+            //
+            // Use g++ as the compiler for IntelliSense analysis (standard C++ mode, without full CUDA-specific parsing)
+            //
+            // "compilerPath": "/usr/bin/g++",
+            //
+            "compilerArgs": [
+                "-Xcompiler", //-fopenmp for g++
+                "-fopenmp"
+                //"-Xcompiler", //-Wall for g++
+                //"-Wall"
+                //"-Xcompiler", // -Wunused-variable for g++
+                //"-Wunused-variable"
+            ],
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "linux-gcc-x64",
+            "defines": [
+                "_OPENMP" //  Enable IntelliSense support for OpenMP (#include <omp.h> and OpenMP symbols)
+            ]
+        }
+    ],
+    "version": 4
+}

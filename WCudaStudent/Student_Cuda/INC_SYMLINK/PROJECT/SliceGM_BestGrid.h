@@ -1,0 +1,1 @@
+/home/bilat/CBI/Dropbox/02_CBI_LINUX/CoursCuda/toStudent/code/WCudaStudent/Student_Cuda/src/core/01_student/03_Slice/02_Slice_GM/host/SliceGM_BestGrid.h

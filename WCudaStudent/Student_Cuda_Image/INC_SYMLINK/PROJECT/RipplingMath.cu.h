@@ -1,0 +1,1 @@
+/home/bilat/CBI/Dropbox/02_CBI_LINUX/CoursCuda/toStudent/code/WCudaStudent/Student_Cuda_Image/src/core/01_student/01_Rippling/device/RipplingMath.cu.h

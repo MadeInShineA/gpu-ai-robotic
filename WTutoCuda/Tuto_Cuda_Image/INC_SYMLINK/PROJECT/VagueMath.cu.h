@@ -1,0 +1,1 @@
+/home/bilat/CBI/Dropbox/02_CBI_LINUX/CoursCuda/toStudent/code/WTutoCuda/Tuto_Cuda_Image/src/core/01_simple_RGBA_uchar4/01_Vague/01_animable/device/VagueMath.cu.h

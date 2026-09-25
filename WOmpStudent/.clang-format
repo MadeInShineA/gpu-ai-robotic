@@ -1,0 +1,30 @@
+BasedOnStyle: LLVM
+BreakBeforeBraces: Whitesmiths
+IndentWidth: 4
+TabWidth: 4
+UseTab: Never
+ColumnLimit: 150
+
+# Empêche de condenser les fonctions courtes sur une seule ligne
+AllowShortFunctionsOnASingleLine: None
+
+# Sécurités supplémentaires pour les structures de contrôle
+AllowShortBlocksOnASingleLine: false
+AllowShortLoopsOnASingleLine: false
+AllowShortIfStatementsOnASingleLine: false
+
+# Namespace
+NamespaceIndentation: All
+
+# pragmas : AUTORISE l'indentation du préprocesseur (Indispensable pour débloquer les pragmas)
+#IndentPPDirectives: AfterHash
+
+# pragmas : Force l'alignement des #pragma avec le niveau du code courant
+#IndentPragmas: true
+
+# pragmas : Traite les pragmas OpenMP comme des blocs de code réguliers (Solution YAML propre)
+#MacroBlockBegin: "^#pragma\\s+omp\\s+parallel.*$"
+#MacroBlockEnd: "^.*sum\\s*\\+=\\s*f\\(xi\\);.*$" # Optionnel : Permet de verrouiller la fin du bloc
+
+# Astuce absolue : Traite les pragmas OpenMP comme des commentaires pour l'alignement
+#CommentPragmas: '^#pragma\\s+omp'

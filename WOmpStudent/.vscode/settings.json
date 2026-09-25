@@ -1,0 +1,40 @@
+{
+    //
+    // format (see .clang-format file)
+    //
+    "C_Cpp.formatting": "clangFormat",
+    "editor.formatOnSave": true,
+    "files.autoSave": "afterDelay",
+    "files.autoSaveDelay": 1000,
+    // 
+    // IntelliSense
+    //
+    "C_Cpp.intelliSenseEngine": "default", //  Enable the IntelliSense semantic engine ("default" / "disabled")
+    "C_Cpp.errorSquiggles": "enabled", // Squiggles (soulignements d'erreurs) IntelliSense ("enabled" / "disabled")
+    //
+    // code completion
+    //
+    "C_Cpp.autocompleteAddParentheses": true,
+    "editor.autoClosingBrackets": "always",
+    "editor.parameterHints.enabled": true,
+    "editor.suggest.snippetsPreventQuickSuggestions": false,
+    "editor.suggest.preview": true,
+    "editor.suggestSelection": "recentlyUsedByPrefix",
+    "editor.inlayHints.enabled": "on",
+    "editor.quickSuggestions": {
+        "comments": false,
+        "strings": false,
+        "other": true
+    },
+    //
+    // file associations
+    //
+    "files.associations": {
+        "*.h": "cpp"
+    },
+    //
+    // Chat
+    //
+    "workbench.secondarySideBar.defaultVisibility": "hidden",
+    "chat.disableAIFeatures": false,
+}

@@ -1,0 +1,389 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        //
+        // --------------------------------------------------------
+        // gcc  
+        // --------------------------------------------------------
+        //
+        //
+        // cbicc gcc clean 
+        //
+        {
+            "label": "cbicc gcc clean",
+            "type": "shell",
+            "command": "cbicc gcc clean",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "presentation": {
+                "clear": true, // Before executing the task, VS Code clears the previous terminal content.
+                "reveal": "always", // Always opens the terminal when the task starts.
+                "panel": "dedicated" // "shared" / "dedicated": "shared" -> all tasks use the same terminal.
+            },
+            "group": "build"
+        }, // cbicc gcc clean 
+        //
+        // cbicc gcc jall
+        //
+        {
+            "label": "cbicc gcc jall",
+            "type": "shell",
+            "command": "cbicc gcc jall",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "presentation": {
+                "clear": true, // Before executing the task, VS Code clears the previous terminal content.
+                "reveal": "always", // Always opens the terminal when the task starts.
+                "panel": "dedicated" // "shared" / "dedicated": "shared" -> all tasks use the same terminal.
+            },
+            "group": "build",
+            "problemMatcher": {
+                "owner": "cbicc-compiler",
+                "fileLocation": [
+                    "relative",
+                    "${workspaceFolder}"
+                ],
+                "pattern": {
+                    "regexp": "^(.+):(\\d+):(\\d+):\\s+(error|warning):\\s+(.*)$", // avec warning//
+                    // "regexp": "^(.+):(\\d+):(\\d+):\\s*(error):\\s+(.*)$", // sans warning
+                    "file": 1,
+                    "line": 2,
+                    "column": 3,
+                    "severity": 4,
+                    "message": 5
+                }
+            }
+        }, // end cbicc gcc jall 
+        //
+        // cbicc gcc run 
+        //
+        {
+            "label": "cbicc gcc run",
+            "type": "shell",
+            "command": "cbicc gcc run",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "presentation": {
+                "clear": true, // Before executing the task, VS Code clears the previous terminal content.
+                "reveal": "always", // Always opens the terminal when the task starts.
+                "panel": "dedicated" // "shared" / "dedicated": "shared" -> all tasks use the same terminal.
+            },
+            "group": "build"
+        }, // cbicc gcc run 
+        //
+        // cbicc gcc runGL
+        //
+        {
+            "label": "cbicc gcc runGL",
+            "type": "shell",
+            "command": "cbicc gcc runGL",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "presentation": {
+                "clear": true, // Before executing the task, VS Code clears the previous terminal content.
+                "reveal": "always", // Always opens the terminal when the task starts.
+                "panel": "dedicated" // "shared" / "dedicated": "shared" -> all tasks use the same terminal.
+            },
+            "group": "build"
+        }, // cbicc gcc run GL
+        //
+        // cbicc gcc clean jall
+        //
+        {
+            "label": "cbicc gcc clean jall",
+            "type": "shell",
+            "dependsOn": [
+                "cbicc gcc clean",
+                "cbicc gcc jall"
+            ],
+            "dependsOrder": "sequence",
+            "group": "build"
+        }, // end cbicc gcc clean jall
+        //
+        // cbicc gcc clean jall run
+        //
+        {
+            "label": "cbicc gcc clean jall run",
+            "type": "shell",
+            "dependsOn": [
+                "cbicc gcc clean",
+                "cbicc gcc jall",
+                "cbicc gcc run"
+            ],
+            "dependsOrder": "sequence",
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            }
+        }, // end cbicc gcc clean jall run
+        //
+        // cbicc gcc clean jall runGL
+        //
+        {
+            "label": "cbicc gcc clean jall runGL",
+            "type": "shell",
+            "dependsOn": [
+                "cbicc gcc clean",
+                "cbicc gcc jall",
+                "cbicc gcc runGL"
+            ],
+            "dependsOrder": "sequence",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }, // end cbicc gcc clean jall runGL
+        //
+        // cbicc gcc kill
+        //
+        {
+            "label": "cbicc gcc kill",
+            "type": "shell",
+            "command": "cbicc gcc kill",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "presentation": {
+                "clear": true, // Before executing the task, VS Code clears the previous terminal content.
+                "reveal": "always", // Always opens the terminal when the task starts.
+                "panel": "dedicated" // "shared" / "dedicated": "shared" -> all tasks use the same terminal.
+            },
+            "group": "build"
+        }, // end cbicc gcc kill
+        //
+        // --------------------------------------------------------
+        // intel  
+        // --------------------------------------------------------
+        //
+        // cbicc intel clean 
+        //
+        {
+            "label": "cbicc intel clean",
+            "type": "shell",
+            "command": "cbicc intel clean",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "presentation": {
+                "clear": true, // Before executing the task, VS Code clears the previous terminal content.
+                "reveal": "always", // Always opens the terminal when the task starts.
+                "panel": "dedicated" // "shared" / "dedicated": "shared" -> all tasks use the same terminal.
+            },
+            "group": "build"
+        }, // cbicc intel clean 
+        //
+        // cbicc intel jall
+        //
+        {
+            "label": "cbicc intel jall",
+            "type": "shell",
+            "command": "cbicc intel jall",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "presentation": {
+                "clear": true, // Before executing the task, VS Code clears the previous terminal content.
+                "reveal": "always", // Always opens the terminal when the task starts.
+                "panel": "dedicated" // "shared" / "dedicated": "shared" -> all tasks use the same terminal.
+            },
+            "group": "build",
+            "problemMatcher": {
+                "owner": "cbicc-compiler",
+                "fileLocation": [
+                    "relative",
+                    "${workspaceFolder}"
+                ],
+                "pattern": {
+                    "regexp": "^(.+):(\\d+):(\\d+):\\s+(error|warning):\\s+(.*)$", // avec warning//
+                    // "regexp": "^(.+):(\\d+):(\\d+):\\s*(error):\\s+(.*)$", // sans warning
+                    "file": 1,
+                    "line": 2,
+                    "column": 3,
+                    "severity": 4,
+                    "message": 5
+                }
+            }
+        }, // end cbicc intel jall 
+        //
+        // cbicc intel run 
+        //
+        {
+            "label": "cbicc intel run",
+            "type": "shell",
+            "command": "cbicc intel run",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "presentation": {
+                "clear": true, // Before executing the task, VS Code clears the previous terminal content.
+                "reveal": "always", // Always opens the terminal when the task starts.
+                "panel": "dedicated" // "shared" / "dedicated": "shared" -> all tasks use the same terminal.
+            },
+            "group": "build"
+        }, // cbicc intel run 
+        //
+        // cbicc intel runGL
+        //
+        {
+            "label": "cbicc intel runGL",
+            "type": "shell",
+            "command": "cbicc intel runGL",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "presentation": {
+                "clear": true, // Before executing the task, VS Code clears the previous terminal content.
+                "reveal": "always", // Always opens the terminal when the task starts.
+                "panel": "dedicated" // "shared" / "dedicated": "shared" -> all tasks use the same terminal.
+            },
+            "group": "build"
+        }, // cbicc intel run GL
+        //
+        // cbicc intel clean jall runGL
+        //
+        {
+            "label": "cbicc intel clean jall runGL",
+            "type": "shell",
+            "dependsOn": [
+                "cbicc intel clean",
+                "cbicc intel jall",
+                "cbicc intel runGL"
+            ],
+            "dependsOrder": "sequence",
+            "group": "build"
+        }, // end cbicc intel clean jall runGL
+        //
+        // cbicc intel kill
+        //
+        {
+            "label": "cbicc intel kill",
+            "type": "shell",
+            "command": "cbicc intel kill",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "presentation": {
+                "clear": true, // Before executing the task, VS Code clears the previous terminal content.
+                "reveal": "always", // Always opens the terminal when the task starts.
+                "panel": "dedicated" // "shared" / "dedicated": "shared" -> all tasks use the same terminal.
+            },
+            "group": "build"
+        }, // end cbicc intel kill
+        //
+        // --------------------------------------------------------
+        // Other  
+        // --------------------------------------------------------
+        //
+        // cbicc gcc dependenciesLinux
+        //
+        {
+            "label": "cbicc gcc dependenciesLinux",
+            "type": "shell",
+            "command": "cbicc gcc dependenciesLinux",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "presentation": {
+                "clear": true, // Before executing the task, VS Code clears the previous terminal content.
+                "reveal": "always", // Always opens the terminal when the task starts.
+                "panel": "dedicated" // "shared" / "dedicated": "shared" -> all tasks use the same terminal.
+            },
+            "group": "build"
+        }, // end cbicc gcc dependenciesLinux
+        //
+        // cbicc gcc symlinkExtInc
+        //
+        {
+            "label": "cbicc gcc symlinkExtInc",
+            "type": "shell",
+            "command": "cbicc gcc symlinkExtInc",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "presentation": {
+                "clear": true, // Before executing the task, VS Code clears the previous terminal content.
+                "reveal": "always", // Always opens the terminal when the task starts.
+                "panel": "dedicated" // "shared" / "dedicated": "shared" -> all tasks use the same terminal.
+            },
+            "group": "build"
+        }, // end cbicc gcc symlinkExtInc
+        //
+        // cbicc gcc package
+        //
+        {
+            "label": "cbicc gcc package",
+            "type": "shell",
+            "command": "cbicc gcc package",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "presentation": {
+                "clear": true, // Before executing the task, VS Code clears the previous terminal content.
+                "reveal": "always", // Always opens the terminal when the task starts.
+                "panel": "dedicated" // "shared" / "dedicated": "shared" -> all tasks use the same terminal.
+            },
+            "group": "build"
+        }, // end cbicc cgccuda package 
+        //
+        // cbicc gcc packageRun
+        //
+        {
+            "label": "cbicc gcc packageRun",
+            "type": "shell",
+            "command": "cbicc gcc packageRun",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "presentation": {
+                "clear": true, // Before executing the task, VS Code clears the previous terminal content.
+                "reveal": "always", // Always opens the terminal when the task starts.
+                "panel": "dedicated" // "shared" / "dedicated": "shared" -> all tasks use the same terminal.
+            },
+            "group": "build"
+        }, // end cbicc gcc packageRun 
+        //
+        // --------------------------------------------------------
+        // Debug  
+        // --------------------------------------------------------
+        //
+        //  current folder (debug)
+        //
+        {
+            "label": "ls",
+            "type": "shell",
+            "command": "pwd; ls -la",
+            "options": {
+                "cwd": "${fileWorkspaceFolder}" // fileWorkspaceFolder workspaceFolder
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated"
+            }
+        }, // end current folder 
+        //
+        // --------------------------------------------------------
+        // Tasks  
+        // --------------------------------------------------------
+        //
+        //  format current file
+        //
+        {
+            "label": "format current file",
+            "type": "shell",
+            "command": "clang-format -i \"${file}\"", // sudo apt install clang-format
+        }, // end format current file
+        //
+        //  format all file
+        //
+        {
+            "label": "format all files",
+            "type": "shell",
+            "command": "find . -type f \\( -name '*.cpp' -o -name '*.h' -o -name '*.hpp' -o -name '*.cu' -o -name '*.cu.h' \\) -exec clang-format -i {} +", // sudo apt install clang-format
+            "problemMatcher": []
+        } // end format all file
+    ] // end tasks
+}

@@ -1,0 +1,54 @@
+#pragma once
+
+#include "DomaineKeyListener.h"
+
+#include "ImageFromAnimable.h"
+
+// --------------------------------------------------------------------------------------
+// Declarations
+// --------------------------------------------------------------------------------------
+
+/**
+ * see ImageAnimable_GPU.h
+ *
+ * 	ImageAnimable_RGBA_uchar4
+ * 	ImageAnimable_HSBA_uchar4
+ * 	...
+ */
+class ImageCustomDomaine : public ImageAnimable_RGBA_uchar4
+    {
+
+    // ---------------------------------------------------------------------------
+    // Constructors
+    // ---------------------------------------------------------------------------
+
+  public:
+    ImageCustomDomaine(Animable_I<uchar4> *ptrAnimable, ColorRGB_01 titleColor);
+
+    virtual ~ImageCustomDomaine();
+
+    // ---------------------------------------------------------------------------
+    // Methodes
+    // ---------------------------------------------------------------------------
+
+  public:
+    /**
+     * Call periodicly by the api
+     * Override
+     */
+    virtual void paintPrimitives(Graphic2D &graphic2D); // override
+
+  private:
+    void controle();
+
+    // ---------------------------------------------------------------------------
+    // Attributes
+    // ---------------------------------------------------------------------------
+  private:
+    // Tools
+    DomaineKeyListener *ptrKeyListener;
+    };
+
+// ---------------------------------------------------------------------------
+// End
+// ---------------------------------------------------------------------------

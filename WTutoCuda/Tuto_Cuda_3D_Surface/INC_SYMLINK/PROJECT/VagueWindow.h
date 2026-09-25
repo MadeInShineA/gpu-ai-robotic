@@ -1,0 +1,1 @@
+/home/bilat/CBI/Dropbox/02_CBI_LINUX/CoursCuda/toStudent/code/WTutoCuda/Tuto_Cuda_3D_Surface/src/core/01_highmap/a_vague_RGBA_uchar4/provider/VagueWindow.h
