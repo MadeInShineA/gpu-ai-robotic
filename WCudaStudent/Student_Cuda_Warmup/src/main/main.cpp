@@ -29,14 +29,14 @@ extern bool exemple_addArray_11();
 // Private
 // ---------------------------------
 
-static void array(bool &isOk);
-static void scalar(bool &isOk);
+static void array(bool& isOk);
+static void scalar(bool& isOk);
 
 // --------------------------------------------------------------------------------------
 // Implementation
 // --------------------------------------------------------------------------------------
 
-int main(int argc, char **argv)
+int main(int argc, char** argv)
     {
         // Facultatif
         {
@@ -54,8 +54,8 @@ int main(int argc, char **argv)
         bool isOk = true;
 
         // Commenter ce dont vous n'avez pas besoin ci-dessous
-        scalar(isOk); // commenter dans la methode ci-dessous ce que vous ne voulez pas lancer
-        // array(isOk);	// commenter dans la methode ci-dessous ce que vous ne voulez pas lancer
+        // scalar(isOk); // commenter dans la methode ci-dessous ce que vous ne voulez pas lancer
+        array(isOk); // commenter dans la methode ci-dessous ce que vous ne voulez pas lancer
 
         Couts::statusln(isOk);
 
@@ -67,15 +67,15 @@ int main(int argc, char **argv)
 // Private
 // ---------------------------------
 
-static void scalar(bool &isOk)
+static void scalar(bool& isOk)
     {
     isOk &= exemple_addScalar_procedurale();
     // isOk &= exemple_addScalar_object();
     }
 
-static void array(bool &isOk)
+static void array(bool& isOk)
     {
-    // isOk &= exemple_addArray_procedurale();
+    isOk &= exemple_addArray_procedurale();
     //  isOk &= exemple_addArray_object();
     //  isOk &= exemple_addArray_11();
     }

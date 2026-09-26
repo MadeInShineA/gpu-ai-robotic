@@ -17,7 +17,7 @@ using std::endl;
 // Declarations
 // --------------------------------------------------------------------------------------
 
-static __global__ void kaddArray(float *ptrGMV1, float *ptrGMV2, float *ptrGMW, int n);
+static __global__ void kaddArray(float* ptrGMV1, float* ptrGMV2, float* ptrGMW, int n);
 
 // --------------------------------------------------------------------------------------
 // Host
@@ -28,9 +28,38 @@ static __global__ void kaddArray(float *ptrGMV1, float *ptrGMV2, float *ptrGMW, 
  * ptrW receptionne le resultat
  * n nombre de case
  */
-__host__ void addArray_procedurale(float *ptrV1, float *ptrV2, float *ptrW, int n) // __host__ facultatif
+__host__ void addArray_procedurale(float* ptrV1, float* ptrV2, float* ptrW, int n) // __host__ facultatif
     {
-    // TODO addArray
+
+    float* ptrGMV1;
+    float* ptrGMV2;
+    float* ptrGMW;
+
+    size_t size = sizeof(float) * n;
+
+    // Assign the Global Memory
+    GM::malloc(&ptrGMV1, size);
+    GM::malloc(&ptrGMV2, size);
+    GM::malloc(&ptrGMW, size);
+
+    // Move the array values to the Device
+    GM::memcpyHToD(ptrGMV1, ptrV1, size);
+    GM::memcpyHToD(ptrGMV2, ptrV2, size);
+
+    // TODO: Put correct size
+    dim3 dg(4, 4, 2);
+    dim3 db(4, 4, 2);
+
+    // Call the kernel
+    kaddArray<<<dg, db>>>(ptrGMV1, ptrGMV2, ptrGMW, n);
+
+    // Get back the results
+    GM::memcpyDToH(ptrW, ptrGMW, size);
+
+    // Free the Global memory
+    GM::free(ptrGMV1);
+    GM::free(ptrGMV2);
+    GM::free(ptrGMW);
     }
 
 // --------------------------------------------------------------------------------------
@@ -40,14 +69,19 @@ __host__ void addArray_procedurale(float *ptrV1, float *ptrV2, float *ptrW, int 
 /**
  * output : void required, because kernel is asynchrone
  */
-__global__ void kaddArray(float *ptrGMV1, float *ptrGMV2, float *ptrGMW, int n)
+__global__ void kaddArray(float* ptrGMV1, float* ptrGMV2, float* ptrGMW, int n)
     {
     const int NB_THREAD = Thread2D::nbThread();
     const int TID = Thread2D::tid();
 
-    // pattern entrelacement
+    int work = TID;
 
-    // TODO addArray
+    while (work < n)
+        {
+        ptrGMW[work] = ptrGMV1[work] + ptrGMV2[work];
+
+        work += NB_THREAD;
+        }
     }
 
 // --------------------------------------------------------------------------------------

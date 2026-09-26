@@ -14,7 +14,7 @@ using std::endl;
 // Declaration
 // --------------------------------------------------------------------------------------
 
-__global__ static void kaddScalar(int a, int b, int *ptrSumGM);
+__global__ static void kaddScalar(int a, int b, int* ptrSumGM);
 
 // --------------------------------------------------------------------------------------
 // Host
@@ -23,8 +23,8 @@ __global__ static void kaddScalar(int a, int b, int *ptrSumGM);
 __host__ int addScalar_procedurale(int a, int b) // __host__ facultatif
     {
     int sum;            // variable pour le resultat cite host
-    int *ptrSum = &sum; // on host (CPU)
-    int *ptrSumGM;      // on device (GPU)
+    int* ptrSum = &sum; // on host (CPU)
+    int* ptrSumGM;      // on device (GPU)
 
     // MM (memory managment)
     size_t size = sizeof(int);   // [octet]
@@ -54,7 +54,7 @@ __host__ int addScalar_procedurale(int a, int b) // __host__ facultatif
 /**
  * Hyp : 1 seul thread, ie dg(1,1,1) et db (1,1,1)
  */
-__global__ void kaddScalar(int a, int b, int *ptrSumGM)
+__global__ void kaddScalar(int a, int b, int* ptrSumGM)
     {
     *ptrSumGM = a + b; // Hyp: 1 seul thread (pas besoin de plus, pour additioner 2 nombre)
 
