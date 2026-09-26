@@ -1,0 +1,25 @@
+# Build outputs
+RELEASE/
+**/RELEASE/
+
+# Generated benchmark/output data
+out/
+**/out/
+
+# Object and dependency files
+*.o
+*.d
+*.obj
+
+# Compiled binaries
+*.run
+*.exe
+
+# Generated media files
+*.ppm
+*.bmp
+*.png
+*.jpg
+*.jpeg
+*.mp4
+*.avi
