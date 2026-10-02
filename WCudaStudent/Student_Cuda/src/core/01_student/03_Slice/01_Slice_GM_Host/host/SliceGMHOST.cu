@@ -16,27 +16,28 @@ using std::to_string;
 // Extern
 // --------------------------------------------------------------------------------------
 
-extern __global__ void reductionIntraThreadGMHOST(float *tabGM, int nbSlice);
+extern __global__ void reductionIntraThreadGMHOST(float* tabGM, int nbSlice);
 
 // --------------------------------------------------------------------------------------
 // Constructors
 // --------------------------------------------------------------------------------------
 
-SliceGMHOST::SliceGMHOST(Grid grid, int nbSlice, double *ptrPiHat, bool isVerbose)
+SliceGMHOST::SliceGMHOST(Grid grid, int nbSlice, double* ptrPiHat, bool isVerbose)
     : RunnableGPU(grid, "SliceGM_HOST_" + to_string(nbSlice), isVerbose), // classe parente
                                                                           //
       nbSlice(nbSlice),                                                   //
       ptrPiHat(ptrPiHat)                                                  //
     {
-    this->nTabGM = -1;    // TODO SliceGMHOST // le nombre de case de tabGM. Indication :  grid.threadCounts() donne le nombre de thread ed la grille
-    this->sizeTabGM = -1; //  TODO SliceGMHOST // la taille en octet de tabGM [octet]
+    this->nTabGM = grid.threadCounts();
+    this->sizeTabGM = sizeof(float) * this->nTabGM;
 
-    // TODO SliceGMHOST
+    GM::malloc(&this->tabGM, this->sizeTabGM);
+    
     }
 
 SliceGMHOST::~SliceGMHOST(void)
     {
-    // TODO SliceGMHOST
+    GM::free(this->tabGM);
     }
 
 // --------------------------------------------------------------------------------------
@@ -82,6 +83,24 @@ void SliceGMHOST::reductionHost()
     // 4) Finalisation du calcul de ptrPiHat
 
     // TODO SliceGMHOST
+
+    float tab[this->nTabGM];
+
+    // GM::memcpyHToD(this->tabGM, tab, this->sizeTabGM);
+    reductionIntraThreadGMHOST<<<this->dg, this->db>>>(this->tabGM, this->nbSlice);
+
+    GM::memcpyDToH(tab, this->tabGM, this->sizeTabGM);
+
+    float tab_sum = 0.0f;
+
+    for (int i = 0; i < this->nTabGM; i++)
+        {
+        tab_sum += tab[i];
+        }
+
+    float pi = tab_sum * (1.0f / float(this->nbSlice));
+
+    *this->ptrPiHat = pi;
     }
 
 // --------------------------------------------------------------------------------------

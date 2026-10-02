@@ -1,1 +1,0 @@
-/home/bilat/CBI/Dropbox/02_CBI_LINUX/CoursCuda/toStudent/code/WCudaStudent/Student_Cuda/src/core/01_student/05_addvector_stream/03_tristream/host/helper/warmup/run4Slice.h

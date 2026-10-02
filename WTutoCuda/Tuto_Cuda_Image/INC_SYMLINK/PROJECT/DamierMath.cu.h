@@ -1,1 +1,0 @@
-/home/bilat/CBI/Dropbox/02_CBI_LINUX/CoursCuda/toStudent/code/WTutoCuda/Tuto_Cuda_Image/src/core/01_simple_RGBA_uchar4/02_Damier_Zoomable/01_animable/device/DamierMath.cu.h

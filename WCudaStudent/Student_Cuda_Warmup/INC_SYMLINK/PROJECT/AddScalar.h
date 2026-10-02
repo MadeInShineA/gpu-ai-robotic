@@ -1,1 +1,0 @@
-/home/bilat/CBI/Dropbox/02_CBI_LINUX/CoursCuda/toStudent/code/WCudaStudent/Student_Cuda_Warmup/src/core/00_addScalar/01_poo/host/AddScalar.h

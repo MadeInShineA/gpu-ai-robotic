@@ -25,9 +25,9 @@ bool exemple_addArray_object()
     {
     // Exemple de data
     int n = 8;
-    float *ptrV1 = ArrayTools::createV1(n); // create and fill
-    float *ptrV2 = ArrayTools::createV2(n); // create and fill
-    float *ptrW = new float[n];
+    float* ptrV1 = ArrayTools::createV1(n); // create and fill
+    float* ptrV2 = ArrayTools::createV2(n); // create and fill
+    float* ptrW = new float[n];
 
         // Cuda
         {
@@ -70,15 +70,9 @@ static Grid createGrid()
     const int MP = Hardware::getMPCount();
     const int CORE_MP = Hardware::getCoreCountMP();
 
-    dim3 dg(1, 1, 1); // TODO addArray
-    dim3 db(1, 1, 1); // TODO addArray  // produit <=1024
+    dim3 dg(MP, 2, 1);      // TODO addArray
+    dim3 db(CORE_MP, 1, 1); // TODO addArray  // produit <=1024
     Grid grid(dg, db);
-
-        // to remove once coded
-        {
-        Couts::redln("aie aie aie, your best grid won t build itself");
-        assert(false);
-        }
 
     return grid;
     }

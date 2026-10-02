@@ -22,10 +22,21 @@ static __device__ float f(float x);
  * tabGM est un tableau promu, qui a autant de case que de thread
  * </pre>
  */
-__global__ void reductionIntraThreadGMHOST(float *tabGM, int nbSlice)
+__global__ void reductionIntraThreadGMHOST(float* tabGM, int nbSlice)
     {
     const int NB_THREAD = Thread2D::nbThread();
     const int TID = Thread2D::tid();
+
+    const float dx = 1.0f / float(nbSlice);
+
+    int work = TID;
+    tabGM[TID] = 0.0f;
+
+    while (work < nbSlice)
+        {
+        tabGM[TID] += f(work * dx);
+        work += NB_THREAD;
+        }
 
     // TODO SliceGMHOST
 
@@ -33,7 +44,7 @@ __global__ void reductionIntraThreadGMHOST(float *tabGM, int nbSlice)
     //
     //		(C1) 	Ne calculer pas en double cote device, mais tout en float.
     //			En particulier, on ecrira 4.0f et non 4 (meme si ici le compilateur va l'optimiser a notre place, mais c'est bien de la faire par
-    //principe)
+    // principe)
     //
     // 		(C2) 	Effectuez plutot le fois DX de l'aire du slice une seule fois par Thread, que pour chaque slice,
     //          	 ou qu'une seule fois cote host (debordement de type float cote device, car on ne fait que sommer?)
@@ -45,8 +56,7 @@ __global__ void reductionIntraThreadGMHOST(float *tabGM, int nbSlice)
 
 __device__ float f(float x)
     {
-    // TODO SliceGMHOST
-    return -1;
+    return 4.0f / (1.0f + x * x);
     }
 
 // --------------------------------------------------------------------------------------

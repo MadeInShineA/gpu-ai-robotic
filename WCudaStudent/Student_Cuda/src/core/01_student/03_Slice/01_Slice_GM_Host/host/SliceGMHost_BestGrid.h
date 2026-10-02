@@ -21,14 +21,12 @@ namespace sliceGMHost
         static Grid get()
             {
             const int MP = Hardware::getMPCount();
+            const int CORE_COUNT = Hardware::getCoreCountMP();
 
-                // TODO SliceGMHOST grid
+            dim3 dg = (MP, 32, 32);
+            dim3 db = (CORE_COUNT, 256, 256);
 
-                // to remove once coded
-                {
-                Couts::redln("aie aie aie, your best grid won t build itself");
-                assert(false);
-                }
+            return Grid(dg, db);
             }
         };
 

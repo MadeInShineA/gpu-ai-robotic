@@ -1,1 +1,0 @@
-/home/bilat/CBI/Dropbox/02_CBI_LINUX/CoursCuda/toStudent/code/WCudaStudent/Student_Cuda_Video/src/core/01_WARMUP/c_texture_cuarray/02_host/VideoTextureCuarray.h

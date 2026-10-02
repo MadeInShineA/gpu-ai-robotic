@@ -1,1 +1,0 @@
-/opt/api/cbi/infographie/opengl/305/Bilat_OpenGL_Tools_Cuda/INC/envBilatGLCuda.h

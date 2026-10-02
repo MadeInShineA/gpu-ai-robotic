@@ -23,3 +23,4 @@ out/
 *.jpeg
 *.mp4
 *.avi
+*INC_SYMLINK*

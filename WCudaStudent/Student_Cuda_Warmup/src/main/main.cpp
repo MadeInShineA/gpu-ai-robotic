@@ -43,7 +43,7 @@ int main(int argc, char** argv)
         Hardware::loadCudaDriverAll();
         Hardware::printAllSimple();
 
-        const int DEVICE_ID = 0;
+        const int DEVICE_ID = 2;
         Hardware::setDevice(DEVICE_ID);
         }
 
@@ -75,8 +75,8 @@ static void scalar(bool& isOk)
 
 static void array(bool& isOk)
     {
-    isOk &= exemple_addArray_procedurale();
-    //  isOk &= exemple_addArray_object();
+    // isOk &= exemple_addArray_procedurale();
+    isOk &= exemple_addArray_object();
     //  isOk &= exemple_addArray_11();
     }
 

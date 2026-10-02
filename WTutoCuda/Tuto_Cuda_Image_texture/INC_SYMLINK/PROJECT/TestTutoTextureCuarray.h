@@ -1,1 +1,0 @@
-/home/bilat/CBI/Dropbox/02_CBI_LINUX/CoursCuda/toStudent/code/WTutoCuda/Tuto_Cuda_Image_texture/src/test/unit/b_NEW/b_texture_cuarray/TestTutoTextureCuarray.h

@@ -1,1 +1,0 @@
-/home/bilat/CBI/Dropbox/02_CBI_LINUX/CoursCuda/toStudent/code/WTutoCuda/Tuto_Cuda_Image_texture/src/core/02_NEW/a_gm_texture/02_host/TutoTextureGM.h

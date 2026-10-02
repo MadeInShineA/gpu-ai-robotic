@@ -13,7 +13,7 @@ using std::endl;
 // Extern
 // --------------------------------------------------------------------------------------
 
-extern __global__ void addScalar(float a, float b, float *ptrSumGM);
+extern __global__ void addScalar(float a, float b, float* ptrSumGM);
 
 // --------------------------------------------------------------------------------------
 // Implementation
@@ -22,7 +22,7 @@ extern __global__ void addScalar(float a, float b, float *ptrSumGM);
 /**
  * ptrSum receptionne le resultat
  */
-AddScalar::AddScalar(float a, float b, float *ptrSum)
+AddScalar::AddScalar(float a, float b, float* ptrSum)
     : a(a), //
       b(b), //
       ptrSum(ptrSum)

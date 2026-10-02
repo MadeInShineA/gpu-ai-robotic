@@ -20,7 +20,7 @@ extern int mainBrutforce();
 //  Implementations
 // --------------------------------------------------------------------------------------
 
-int main(int argc, char **argv)
+int main(int argc, char** argv)
     {
     // Limits::show();
 
@@ -28,8 +28,8 @@ int main(int argc, char **argv)
 
         // public
         {
-        cudaContext.deviceId = 0;                    //  in [0,2] width Server Cuda3
-        cudaContext.launchMode = LaunchModeMOO::USE; // USE TEST  BENCHMARK  FORCEBRUT
+        cudaContext.deviceId = 2;                     //  in [0,2] width Server Cuda3
+        cudaContext.launchMode = LaunchModeMOO::TEST; // USE TEST  BENCHMARK  FORCEBRUT
 
         cudaContext.deviceDriver = DeviceDriver::LOAD_ALL; // LOAD_CURRENT   LOAD_ALL
         cudaContext.deviceInfo = DeviceInfo::ALL_SIMPLE;   // NONE  ALL  ALL_SIMPLE  CURRENT

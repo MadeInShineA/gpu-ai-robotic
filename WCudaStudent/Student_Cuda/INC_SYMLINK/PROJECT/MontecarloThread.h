@@ -1,1 +1,0 @@
-/home/bilat/CBI/Dropbox/02_CBI_LINUX/CoursCuda/toStudent/code/WCudaStudent/Student_Cuda/src/core/01_student/04_Montecarlo/02_multi_gpu/host/01_thread/MontecarloThread.h

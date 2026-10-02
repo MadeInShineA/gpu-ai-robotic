@@ -11,11 +11,19 @@
 /**
  * output : void required, because kernel is asynchrone
  */
-__global__ void addArray(float *ptrGMV1, float *ptrGMV2, float *ptrGMW, int n)
+__global__ void addArray(float* ptrGMV1, float* ptrGMV2, float* ptrGMW, int n)
     {
     const int NB_THREAD = Thread2D::nbThread();
     const int TID = Thread2D::tid();
 
+    int work = TID;
+
+    while (work < n)
+        {
+        ptrGMW[work] = ptrGMV1[work] + ptrGMV2[work];
+
+        work += NB_THREAD;
+        }
     // Debug, facultatif
     //    if (TID == 0)
     //	{
