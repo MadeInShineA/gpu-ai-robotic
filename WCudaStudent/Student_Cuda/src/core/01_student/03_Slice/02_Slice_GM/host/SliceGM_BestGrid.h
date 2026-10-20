@@ -23,16 +23,12 @@ namespace sliceGM
             const bool IS_CHECK_HEURISTIC = false;
 
             const int MP = Hardware::getMPCount();
+            const int CORE_COUNT = Hardware::getCoreCountMP();
 
-            dim3 dg(1, 1, 1);                      // power 2 // TODO SliceGM grid
-            dim3 db(1, 1, 1);                      // power 2 // TODO SliceGM grid
+            dim3 dg = (MP, 128, 128);
+            dim3 db = (CORE_COUNT, 512, 512);
+
             Grid grid(dg, db, IS_CHECK_HEURISTIC); // all power 2
-
-                // to remove once coded
-                {
-                Couts::redln("aie aie aie, your best grid won t build itself");
-                assert(false);
-                }
 
             return grid;
             }

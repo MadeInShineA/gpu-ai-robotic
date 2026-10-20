@@ -54,17 +54,17 @@ int mainBenchmark()
 
         // Slice
         {
-        sliceGMHOST();
-        //	sliceGM();
+        // sliceGMHOST();
+        sliceGM();
         //	sliceSM();
         //	sliceMulti();
         }
 
         // Montecarlo
         {
-            //	montecarloMono();
-            //	montecarloThread();
-            //	montecarloStream();
+        //	montecarloMono();
+        //	montecarloThread();
+        //	montecarloStream();
         }
 
         // Vector

@@ -22,9 +22,22 @@ static __device__ float f(float x);
  * tabGM est un tableau promu, qui a autant de case que de thread
  * </pre>
  */
-__global__ void reductionIntraThreadGM(float *tabGM, int nbSlice)
+__global__ void reductionIntraThreadGM(float* tabGM, int nbSlice)
     {
     // TODO SliceGM (idem SliceGMHOST) pour cette partie
+    const int NB_THREAD = Thread2D::nbThread();
+    const int TID = Thread2D::tid();
+
+    const float dx = 1.0f / float(nbSlice);
+
+    int work = TID;
+    tabGM[TID] = 0.0f;
+
+    while (work < nbSlice)
+        {
+        tabGM[TID] += f(work * dx);
+        work += NB_THREAD;
+        }
     }
 
 /**
@@ -37,9 +50,15 @@ __global__ void reductionIntraThreadGM(float *tabGM, int nbSlice)
  * Output: le resultat de la reduction est tans tabGM[0]
  * </pre>
  */
-__global__ void ecrasementGM(float *tabGM, int moitier)
+__global__ void ecrasementGM(float* tabGM, int moitier)
     {
     // TODO SliceGM
+    const int TID = Thread2D::tid();
+
+    if (TID < moitier)
+        {
+        tabGM[TID] += tabGM[moitier + TID];
+        }
     }
 
 // ---------------------------------

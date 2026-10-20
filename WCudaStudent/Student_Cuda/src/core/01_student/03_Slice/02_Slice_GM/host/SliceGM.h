@@ -19,7 +19,7 @@ class SliceGM : public RunnableGPU
      * update piHat
      * Hyp : nbThread est une puissance de 2
      */
-    SliceGM(Grid grid, int nbSlice, double *ptrPiHat, bool isVerbose);
+    SliceGM(Grid grid, int nbSlice, double* ptrPiHat, bool isVerbose);
 
     virtual ~SliceGM();
 
@@ -45,10 +45,10 @@ class SliceGM : public RunnableGPU
     int nbSlice;
 
     // Inputs/Outputs
-    double *ptrPiHat;
+    double* ptrPiHat;
 
     // Tools
-    float *tabGM;
+    float* tabGM;
     size_t sizeTabGM; // [octet]
     int nTabGM;
     };

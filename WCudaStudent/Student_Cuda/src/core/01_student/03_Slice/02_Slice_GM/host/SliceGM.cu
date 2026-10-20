@@ -16,26 +16,27 @@ using std::to_string;
 //  Externs
 // --------------------------------------------------------------------------------------
 
-extern __global__ void reductionIntraThreadGM(float *tabGM, int nbSlice);
-extern __global__ void ecrasementGM(float *tabGM, int moitier);
+extern __global__ void reductionIntraThreadGM(float* tabGM, int nbSlice);
+extern __global__ void ecrasementGM(float* tabGM, int moitier);
 
 // --------------------------------------------------------------------------------------
 // Constructors
 // --------------------------------------------------------------------------------------
 
-SliceGM::SliceGM(Grid grid, int nbSlice, double *ptrPiHat, bool isVerbose)
+SliceGM::SliceGM(Grid grid, int nbSlice, double* ptrPiHat, bool isVerbose)
     : RunnableGPU(grid, "SliceGM_" + to_string(nbSlice), isVerbose), // classe parente
                                                                      //
       nbSlice(nbSlice),                                              //
       ptrPiHat(ptrPiHat)                                             //
     {
-    this->nTabGM = -1;    // TODO SliceGM
-    this->sizeTabGM = -1; //  TODO SliceGM // [octet]
+    this->nTabGM = grid.threadCounts();             // Done SliceGM
+    this->sizeTabGM = this->nTabGM * sizeof(float); //  Done SliceGM // [octet]
+    GM::malloc(&this->tabGM, this->sizeTabGM);
     }
 
 SliceGM::~SliceGM(void)
     {
-    // TODO SliceGM
+    GM::free(this->tabGM);
     }
 
 // --------------------------------------------------------------------------------------
@@ -57,7 +58,7 @@ SliceGM::~SliceGM(void)
 void SliceGM::run()
     {
     // TODO SliceGM // call the kernel (asynchrone)
-
+    reductionIntraThreadGM<<<this->dg, this->db>>>(this->tabGM, this->nbSlice);
     reductionGM();
     }
 
@@ -84,6 +85,21 @@ void SliceGM::reductionGM()
     //
     //				float resultat;
     //				GM::memcpyDToH_float(&resultat,ptrResultGM);
+
+    while (midle > 0)
+        {
+        dim3 db(256);
+        dim3 dg((midle + db.x - 1) / db.x);
+        ecrasementGM<<<dg, db>>>(this->tabGM, midle);
+        midle = midle >> 1;
+        }
+
+    float result;
+    GM::memcpyDToH_float(&result, &this->tabGM[0]);
+
+    result = result * (1.0f / float(this->nbSlice));
+
+    *this->ptrPiHat = double(result);
     }
 
 // --------------------------------------------------------------------------------------
