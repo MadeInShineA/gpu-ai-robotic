@@ -8,7 +8,7 @@
 // ---------------------------------------------------------------------------------------------
 
 #define BinaryOperator(name) T (*name)(T, T)
-#define AtomicOp(name) void (*name)(T *, T)
+#define AtomicOp(name) void (*name)(T*, T)
 
 // ---------------------------------------------------------------------------------------------
 // Implementation
@@ -48,13 +48,16 @@ class Reduction
      *
      * 			ReductionGeneric::reduce(add,addAtomic,tabSm,ptrResultGM);
      */
-    template <typename T> static __device__ void reduce(BinaryOperator(OP), AtomicOp(ATOMIC_OP), T *tabSM, T *ptrResultGM)
+    template <typename T> static __device__ void reduce(BinaryOperator(OP), AtomicOp(ATOMIC_OP), T* tabSM, T* ptrResultGM)
         // static __device__ void reduce(T (*OP)(T, T) ,void (*ATOMIC_OP)(T*, T), T* tabSM, T* ptrResultGM) // idem ci-dessus mais sans define
         {
         // Meme principe que ReductionAdd
 
         // TODO ReductionGeneric
         // Meme principe que ReductionAdd
+        reductionIntraBlock(OP, tabSM);
+
+        reductionInterBlock(ATOMIC_OP, tabSM, ptrResultGM);
         }
 
   private:
@@ -65,32 +68,54 @@ class Reduction
     /**
      * used by reductionIntraBlock
      */
-    template <typename T> static __device__ void ecrasement(BinaryOperator(OP), T *tabSM, int middle)
+    template <typename T> static __device__ void ecrasement(BinaryOperator(OP), T* tabSM, int middle)
         {
         // TODO ReductionGeneric
         // Meme principe que ReductionAdd
         // OP est la variable representant l'operateur binaire
+        const int TID = Thread2D::tidLocal();
+
+        if (TID < middle)
+            {
+            tabSM[TID] = OP(tabSM[TID], tabSM[TID + middle]);
+            }
         }
 
     /**
      * Sur place, le resultat est dans tabSM[0]
      */
-    template <typename T> static __device__ void reductionIntraBlock(BinaryOperator(OP), T *tabSM)
+    template <typename T> static __device__ void reductionIntraBlock(BinaryOperator(OP), T* tabSM)
         {
         // TODO ReductionGeneric
         // Meme principe que ReductionAdd
         // OP est la variable representant l'operateur binaire
+        int middle = Thread2D::nbThreadBlock() >> 1;
+
+        while (middle > 0)
+            {
+            ecrasement(OP, tabSM, middle);
+
+            middle = middle >> 1;
+            __syncthreads();
+            }
+
+        // __syncthreads();// pour touts les threads d'un meme block, necessaires? ou?
         }
 
     // ---------------------------------
     // reductionInterblock
     // ---------------------------------
 
-    template <typename T> static __device__ void reductionInterBlock(AtomicOp(ATOMIC_OP), T *tabSM, T *ptrResultGM)
+    template <typename T> static __device__ void reductionInterBlock(AtomicOp(ATOMIC_OP), T* tabSM, T* ptrResultGM)
         {
         // TODO ReductionGeneric
         // Meme principe que ReductionAdd
         // ATOMIC_OP est la variable representant l'operateur binaire atomic
+        const int TID = Thread2D::tidLocal();
+        if (TID == 0)
+            {
+            ATOMIC_OP(ptrResultGM, tabSM[TID]);
+            }
         }
     };
 

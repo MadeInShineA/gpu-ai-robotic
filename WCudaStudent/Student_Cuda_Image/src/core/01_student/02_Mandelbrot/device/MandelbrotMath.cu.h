@@ -61,7 +61,7 @@ class MandelbrotMath
     // ---------------------------------------------------------------------------
 
   public:
-    __device__ void colorXY(uchar4 *ptrColorIJ, real x, real y)
+    __device__ void colorXY(uchar4* ptrColorIJ, real x, real y)
         {
         // TODO Mandelbrot
 
@@ -82,11 +82,29 @@ class MandelbrotMath
         // 		Etape 2:	Puis une fois que l'image grise est valider, attaquer montecarlo
 
         // debug temp
-        //		{
-        //		ptrColorIJ->x = 128;
-        //		ptrColorIJ->y = 128;
-        //		ptrColorIJ->z = 128;
-        //		ptrColorIJ->w = 255; // opacity facultatif
+
+        /*
+        ptrColorIJ->x = 128;
+        ptrColorIJ->y = 128;
+        ptrColorIJ->z = 128;
+        ptrColorIJ->w = 255;
+        */
+
+        int stop = suite(x, y);
+
+        if (stop >= n)
+            {
+            // NOIR
+            ptrColorIJ->x = 0;
+            ptrColorIJ->y = 0;
+            ptrColorIJ->z = 0;
+            ptrColorIJ->w = 255;
+            }
+        else
+            {
+            float hue01 = float(stop) / float(n - 1);
+            Colors::HSB_TO_RVB(hue01, 1, 1, ptrColorIJ);
+            }
         }
 
   private:
@@ -108,6 +126,29 @@ class MandelbrotMath
 
         // Calculer la suite en (x,y) jusqu'à n, à moins que critere arret soit atteint avant
         // return le nombre d'element de la suite calculer, ie un entier dans [0,n] et non in [1,n]
+
+        real a = ZERO;
+        real b = ZERO;
+
+        int i = 0;
+        real aCopy = a;
+
+        a = (a * a - b * b) + x;
+
+        b = DEUX * aCopy * b + y;
+
+        while ((a * a + b * b) <= QUATRE && i <= n)
+            {
+            aCopy = a;
+
+            a = (a * a - b * b) + x;
+
+            b = DEUX * aCopy * b + y;
+
+            i++;
+            }
+
+        return i;
         }
 
     /////////////////////

@@ -10,7 +10,7 @@
 // Declaration
 // ---------------------------------------------------------------------------------------------
 
-static __device__ void reductionIntraThread(int *tabSM);
+static __device__ void reductionIntraThread(int* tabSM);
 
 // ---------------------------------------------------------------------------------------------
 // Implementation
@@ -19,9 +19,15 @@ static __device__ void reductionIntraThread(int *tabSM);
 /**
  * TID partout en tabSM
  */
-__global__ void KAddIntProtocoleII(int *ptrSumGM)
+__global__ void KAddIntProtocoleII(int* ptrSumGM)
     {
     // TODO ReductionAddIntII
+    extern __shared__ int tabSM[];
+
+    reductionIntraThread(tabSM);
+    __syncthreads();
+
+    ReductionAdd::reduce(tabSM, ptrSumGM);
     }
 
 // ---------------------------------
@@ -31,8 +37,12 @@ __global__ void KAddIntProtocoleII(int *ptrSumGM)
 /**
  * TID partout en tabSM
  */
-__device__ void reductionIntraThread(int *tabSM)
+__device__ void reductionIntraThread(int* tabSM)
     {
+    const int LOCAL_TID = Thread2D::tidLocal();
+    const int TID = Thread2D::tid();
+
+    tabSM[LOCAL_TID] = TID;
     // TODO ReductionAddIntII
     }
 

@@ -14,24 +14,26 @@ using std::to_string;
 // Extern
 // ---------------------------------------------------------------------------------------------
 
-extern __global__ void KIntProtocoleII(int *ptrSumGM);
+extern __global__ void KIntProtocoleII(int* ptrSumGM);
 
 // ---------------------------------------------------------------------------------------------
 // Constructors
 // ---------------------------------------------------------------------------------------------
 
-ReductionIntII::ReductionIntII(const Grid &grid, int *ptrSum, bool isVerbose)
+ReductionIntII::ReductionIntII(const Grid& grid, int* ptrSum, bool isVerbose)
     : // RunnableGPU(grid, "Reduce_Generic_IntII_" + to_string(grid.threadCounts()),isVerbose), // classe parente
       RunnableGPU(grid, "Reduce_Generic_IntII", isVerbose), // classe parente
       ptrSum(ptrSum)
     {
     // TODO ReductionIntII
-    this->sizeSM = -1;
+    this->sizeSM = sizeof(int) * grid.threadByBlock();
+    GM::mallocInt0(&ptrSumGM);
     }
 
 ReductionIntII::~ReductionIntII()
     {
     // TODO ReductionIntII
+    GM::free(ptrSumGM);
     }
 
 // ----------------------------------------------------------------------------------
@@ -41,6 +43,8 @@ ReductionIntII::~ReductionIntII()
 void ReductionIntII::run()
     {
     // TODO ReductionIntII
+    KIntProtocoleII<<<grid.dg, grid.db, this->sizeSM>>>(ptrSumGM);
+    GM::memcpyDToH_int(ptrSum, ptrSumGM);
     }
 
 // ---------------------------------------------------------------------------------------------

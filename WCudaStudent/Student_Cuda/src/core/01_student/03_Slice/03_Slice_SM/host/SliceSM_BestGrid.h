@@ -20,19 +20,16 @@ namespace sliceSM
       public:
         static Grid get()
             {
+
+            const bool IS_CHECK_HEURISTIC = false;
+
             const int MP = Hardware::getMPCount();
+            const int CORE_COUNT = Hardware::getCoreCountMP();
 
-            // TODO SliceGMHOST grid
+            dim3 dg(MP, 1, 1);
+            dim3 db(CORE_COUNT, 8, 1);
 
-            dim3 dg(1, 1, 1); // TODO
-            dim3 db(1, 1, 1); // TODO contrainte : power 2
-            Grid grid(dg, db);
-
-                // to remove once coded
-                {
-                Couts::redln("aie aie aie, your best grid won t build itself");
-                assert(false);
-                }
+            Grid grid(dg, db, IS_CHECK_HEURISTIC); // all power 2
 
             return grid;
             }

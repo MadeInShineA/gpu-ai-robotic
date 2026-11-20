@@ -44,7 +44,7 @@ class ReductionAdd
      * 				GM::mallocInt0(&ptrResultGM);
      *
      */
-    template <typename T> static __device__ void reduce(T *tabSM, T *ptrResultGM)
+    template <typename T> static __device__ void reduce(T* tabSM, T* ptrResultGM)
         {
         // Rappel :
         // 		|ThreadByBlock|=|tabSM| .
@@ -55,6 +55,9 @@ class ReductionAdd
         // TODO ReductionAdd
         // reductionIntraBlock
         // reductionInterblock
+        reductionIntraBlock(tabSM);
+ 
+        reductionInterBlock(tabSM, ptrResultGM);
 
         // __syncthreads();// pour touts les threads d'un meme block, necessaires? ou? pas a le fin en tous les cas
         }
@@ -67,7 +70,7 @@ class ReductionAdd
     /**
      * used by reductionIntraBlock
      */
-    template <typename T> static __device__ void ecrasement(T *tabSM, int middle)
+    template <typename T> static __device__ void ecrasement(T* tabSM, int middle)
         {
         // Indications :
         //	(I1) je suis un thread, je dois faire quoi ?
@@ -75,6 +78,12 @@ class ReductionAdd
         //  (I3) Travailler sous l hypothese d'une grid2d,avec Thread2D
 
         // TODO ReductionAdd
+        const int TID = Thread2D::tidLocal();
+
+        if (TID < middle)
+            {
+            tabSM[TID] += tabSM[TID + middle];
+            }
 
         // __syncthreads();// pour touts les threads d'un meme block, necessaires? ou?
         }
@@ -82,11 +91,21 @@ class ReductionAdd
     /**
      * Sur place, le resultat est dans tabSM[0]
      */
-    template <typename T> static __device__ void reductionIntraBlock(T *tabSM)
+    template <typename T> static __device__ void reductionIntraBlock(T* tabSM)
         {
         // Ecrasement sucessifs dans une boucle (utiliser la methode ecrasement ci-dessus)
 
         // TODO ReductionAdd
+
+        int middle = Thread2D::nbThreadBlock() >> 1;
+
+        while (middle > 0)
+            {
+            ecrasement(tabSM, middle);
+
+            middle = middle >> 1;
+            __syncthreads();
+            }
 
         // __syncthreads();// pour touts les threads d'un meme block, necessaires? ou?
         }
@@ -95,13 +114,18 @@ class ReductionAdd
     // reductionInterblock
     // ---------------------------------
 
-    template <typename T> static __device__ void reductionInterBlock(T *tabSM, T *ptrResultGM)
+    template <typename T> static __device__ void reductionInterBlock(T* tabSM, T* ptrResultGM)
         {
         // Indication:
         //		(I1) Utiliser atomicAdd(pointeurDestination, valeurSource);
         //		(i2) Travailler sous l hypothese d'une grid2d,avec Thread2D
 
         // TODO ReductionAdd
+        const int TID = Thread2D::tidLocal();
+        if (TID == 0)
+            {
+            atomicAdd(ptrResultGM, tabSM[TID]);
+            }
 
         // __syncthreads();// pour touts les threads d'un meme block, necessaires? ou?
         }

@@ -30,8 +30,8 @@ static void raytracingCM2SM();
 int mainBenchmark()
     {
     // Please, un a la fois!
-    rippling();
-    //    mandelbrot(); // Conseil : use nFixe (by example nMin=nMax=80)
+    //    rippling();
+    mandelbrot(); // Conseil : use nFixe (by example nMin=nMax=80)
     //
     //    raytracingGM();
     //    raytracingSM();

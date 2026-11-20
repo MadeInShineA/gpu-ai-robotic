@@ -20,8 +20,8 @@ using std::endl;
 // Declarations
 // ---------------------------------------------------------------------------------------------
 
-static void reduction_add(bool &isOk);
-static void reduction_generic(bool &isOk);
+static void reduction_add(bool& isOk);
+static void reduction_generic(bool& isOk);
 
 static void print(bool isSuccess);
 
@@ -52,25 +52,25 @@ int mainUse()
 /**
  * activer ci-dessous la version souhaiter
  */
-void reduction_add(bool &isOk)
+void reduction_add(bool& isOk)
     {
         // InbI
+        // {
+        // UseReductionAddIntI algo(IS_VERBOSE);
+        // isOk &= algo.isOk(IS_VERBOSE);
+        // }
+
+        // IntII
         {
-        UseReductionAddIntI algo(IS_VERBOSE);
+        UseReductionAddIntII algo(IS_VERBOSE);
         isOk &= algo.isOk(IS_VERBOSE);
         }
-
-    // IntII
-    //	{
-    //	UseReductionAddIntII algo(IS_VERBOSE);
-    //	isOk &= algo.isOk(IS_VERBOSE);
-    //	}
     }
 
 /**
  * activer ci-dessous la version souhaiter
  */
-void reduction_generic(bool &isOk)
+void reduction_generic(bool& isOk)
     { // InbI
         {
         UseReductionIntI algo(IS_VERBOSE);

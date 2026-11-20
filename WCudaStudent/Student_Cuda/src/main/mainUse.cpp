@@ -30,9 +30,9 @@ using std::endl;
 // Declarations
 // --------------------------------------------------------------------------------------
 
-static void slice(bool &isOk);
-static void montecarlo_use(bool &isOk);
-static void vector(bool &isOk);
+static void slice(bool& isOk);
+static void montecarlo_use(bool& isOk);
+static void vector(bool& isOk);
 
 static void print(bool isSuccess);
 
@@ -64,23 +64,23 @@ int mainUse()
 /**
  * activer ci-dessous la version souhaiter
  */
-void slice(bool &isOk)
+void slice(bool& isOk)
     {
-    SliceGmHostUse sliceGmHostUse(IS_VERBOSE);
+    // SliceGmHostUse sliceGmHostUse(IS_VERBOSE);
     // SliceGmUse sliceGmUse(IS_VERBOSE);
-    // SliceSmUse sliceSmUse(IS_VERBOSE);
+    SliceSmUse sliceSmUse(IS_VERBOSE);
     // SliceMultiUse sliceMultiUse(IS_VERBOSE);
 
-    isOk &= sliceGmHostUse.isOk(IS_VERBOSE);
+    // isOk &= sliceGmHostUse.isOk(IS_VERBOSE);
     // isOk &= sliceGmUse.isOk(IS_VERBOSE);
-    // isOk &= sliceSmUse.isOk(IS_VERBOSE);
+    isOk &= sliceSmUse.isOk(IS_VERBOSE);
     // isOk &= sliceMultiUse.isOk(IS_VERBOSE);
     }
 
 /**
  * activer ci-dessous la version souhaiter
  */
-void montecarlo_use(bool &isOk)
+void montecarlo_use(bool& isOk)
     {
     const float HMIN = 4;
     const float HMAX = 10;
@@ -124,7 +124,7 @@ void montecarlo_use(bool &isOk)
 /**
  * activer ci-dessous la version souhaiter
  */
-void vector(bool &isOk)
+void vector(bool& isOk)
     {
         // Base line
         {

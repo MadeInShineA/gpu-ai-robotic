@@ -13,14 +13,14 @@
 // --------------------------------------------------------------------------------------
 
 // optimisation lookup table color
-static __device__ void fill(uchar4 *tabSM, int n);
-static __device__ void color(uchar4 *ptrColor, int k, int n);
+static __device__ void fill(uchar4* tabSM, int n);
+static __device__ void color(uchar4* ptrColor, int k, int n);
 
 // --------------------------------------------------------------------------------------
 // Implementations
 // --------------------------------------------------------------------------------------
 
-__global__ void mandelbrot(uchar4 *tabPixelsGM, uint w, uint h, DomaineMath domaineMath, int n)
+__global__ void mandelbrot(uchar4* tabPixelsGM, uint w, uint h, DomaineMath domaineMath, int n)
     {
     // TODO Mandelbrot  :
     //
@@ -30,6 +30,30 @@ __global__ void mandelbrot(uchar4 *tabPixelsGM, uint w, uint h, DomaineMath doma
 
     double x;
     double y;
+
+    int NB_THREAD = Thread2D::nbThread();
+    int TID = Thread2D::tid();
+    int total = w * h;
+
+    int work = TID;
+
+    MandelbrotMath mb{n};
+
+    while (work < total)
+        {
+        int i = work / w;
+        int j = work % w;
+
+        domaineMath.toXY(i, j, &x, &y);
+
+        uchar4 colorIJ;
+
+        mb.colorXY(&colorIJ, (real)x, (real)y);
+
+        tabPixelsGM[work] = colorIJ;
+
+        work += NB_THREAD;
+        }
     // domaineMath.toXY(i, j, &x, &y); // x et y doivent etre en double! Caster ensuite en real lors du passage à colorXY
     }
 
@@ -40,7 +64,7 @@ __global__ void mandelbrot(uchar4 *tabPixelsGM, uint w, uint h, DomaineMath doma
 /**
  * optimisation lookup table color (facultatif)
  */
-__inline__ __device__ void fill(uchar4 *tabSM, int n)
+__inline__ __device__ void fill(uchar4* tabSM, int n)
     {
     // Indications:
     //		(I1)	tabSM a n cases
@@ -56,7 +80,7 @@ __inline__ __device__ void fill(uchar4 *tabSM, int n)
 /**
  * optimisation lookup table color (facultatif)
  */
-__inline__ __device__ void color(uchar4 *ptrColor, int k, int n)
+__inline__ __device__ void color(uchar4* ptrColor, int k, int n)
     {
     }
 

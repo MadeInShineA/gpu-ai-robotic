@@ -14,24 +14,26 @@ using std::to_string;
 // Declaration
 // ---------------------------------------------------------------------------------------------
 
-extern __global__ void KAddIntProtocoleII(int *ptrSumGM);
+extern __global__ void KAddIntProtocoleII(int* ptrSumGM);
 
 // ---------------------------------------------------------------------------------------------
 // Constructors
 // ---------------------------------------------------------------------------------------------
 
-ReductionAddIntII::ReductionAddIntII(const Grid &grid, int *ptrSum, bool isVerbose)
+ReductionAddIntII::ReductionAddIntII(const Grid& grid, int* ptrSum, bool isVerbose)
     : // RunnableGPU(grid, "Reduce_AddInt_II_" + to_string(grid.threadCounts()),isVerbose), // classe parente
       RunnableGPU(grid, "Reduce_AddInt_II", isVerbose), // classe parente
       ptrSum(ptrSum)
     {
     // TODO ReductionAddIntII
-    this->sizeSM = -1;
+    this->sizeSM = sizeof(int) * grid.threadByBlock();
+    GM::mallocInt0(&ptrSumGM);
     }
 
 ReductionAddIntII::~ReductionAddIntII()
     {
     // TODO ReductionAddIntII
+    GM::free(ptrSumGM);
     }
 
 // ----------------------------------------------------------------------------------
@@ -41,6 +43,9 @@ ReductionAddIntII::~ReductionAddIntII()
 void ReductionAddIntII::run()
     {
     // TODO ReductionAddIntII
+    KAddIntProtocoleII<<<grid.dg, grid.db, this->sizeSM>>>(ptrSumGM);
+
+    GM::memcpyDToH_int(ptrSum, ptrSumGM);
     }
 
 // ---------------------------------------------------------------------------------------------

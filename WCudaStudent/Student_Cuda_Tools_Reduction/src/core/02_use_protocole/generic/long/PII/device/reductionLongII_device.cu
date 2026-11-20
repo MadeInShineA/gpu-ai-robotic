@@ -11,11 +11,11 @@
 // Declaration
 // ---------------------------------------------------------------------------------------------
 
-static __device__ void reductionIntraThread(long *tabSM);
+static __device__ void reductionIntraThread(long* tabSM);
 
 // Operateur reduction
 static __device__ long add(long x, long y);
-static __device__ void addAtomic(long *ptrX, long y);
+static __device__ void addAtomic(long* ptrX, long y);
 
 // ---------------------------------------------------------------------------------------------
 // Implementation
@@ -24,9 +24,14 @@ static __device__ void addAtomic(long *ptrX, long y);
 /**
  * TID partout en tabSM
  */
-__global__ void KLongProtocoleII(long *ptrSumGM)
+__global__ void KLongProtocoleII(long* ptrSumGM)
     {
     // TODO ReductionLongII
+    extern __shared__ long tabSM[];
+
+    reductionIntraThread(tabSM);
+    __syncthreads();
+    Reduction::reduce(add, addAtomic, tabSM, ptrSumGM);
     }
 
 // ----------------------------------------
@@ -36,7 +41,7 @@ __global__ void KLongProtocoleII(long *ptrSumGM)
 /**
  * TID partout en tabSM
  */
-__device__ void reductionIntraThread(long *tabSM)
+__device__ void reductionIntraThread(long* tabSM)
     { // Rappel : Dans le protocoleII on cherche a calculer
     //
     //			x=x+i avec i in [0,N]
@@ -71,6 +76,10 @@ __device__ void reductionIntraThread(long *tabSM)
 
     // pour TID       utiliser const long TID=Thread2D_long::tid();		// (nouvelle methode)
     // pour TID_LOCAL utiliser const int TID_LOCAL=Thread2D::tidLocal();	// (methode habituelle)
+    const long TID = Thread2D_long::tid();
+    const int TID_LOCAL = Thread2D::tidLocal();
+
+    tabSM[TID_LOCAL] = TID;
     }
 
 // ----------------------------------------
@@ -80,6 +89,7 @@ __device__ void reductionIntraThread(long *tabSM)
 __inline__ __device__ long add(long x, long y)
     {
     // TODO ReductionLongII
+    return x + y;
     }
 
 /**
@@ -92,13 +102,14 @@ __inline__ __device__ long add(long x, long y)
  * Question : atomicAdd pour les long existe?
  */
 __device__ int volatile mutex = 0; // variable global
-__device__ void addAtomic(long *ptrX, long y)
+__device__ void addAtomic(long* ptrX, long y)
     {
     Lock locker(&mutex);
     locker.lock();
 
     // TODO ReductionLongII
 
+    *ptrX = *ptrX + y;
     locker.unlock();
     }
 

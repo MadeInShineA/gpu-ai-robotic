@@ -21,15 +21,15 @@ using std::to_string;
 // Declarations
 // --------------------------------------------------------------------------------------
 
-static void rippling(Matlab *ptrMatlab);
-static void mandelbrot(Matlab *ptrMatlab);
-static void raytracingGM(Matlab *ptrMatlab);
-static void raytracingCM(Matlab *ptrMatlab);
-static void raytracingSM(Matlab *ptrMatlab);
-static void raytracingCM2SM(Matlab *ptrMatlab);
+static void rippling(Matlab* ptrMatlab);
+static void mandelbrot(Matlab* ptrMatlab);
+static void raytracingGM(Matlab* ptrMatlab);
+static void raytracingCM(Matlab* ptrMatlab);
+static void raytracingSM(Matlab* ptrMatlab);
+static void raytracingCM2SM(Matlab* ptrMatlab);
 
 // tools
-template <typename T> static void bruteForce(ProviderUse_I *ptrProviderUse, Matlab *ptrMatlab, const PlotType &plotType, double durationMaxS = 0.5);
+template <typename T> static void bruteForce(ProviderUse_I* ptrProviderUse, Matlab* ptrMatlab, const PlotType& plotType, double durationMaxS = 0.5);
 
 // --------------------------------------------------------------------------------------
 // Implementations
@@ -40,8 +40,8 @@ int mainBrutforce()
     Matlab matlab;
 
     // Please, un a la fois!
-    rippling(&matlab);
-    //    mandelbrot(&matlab); // Conseil : use nFixe (by example nMin=nMax=100)
+    //    rippling(&matlab);
+    mandelbrot(&matlab); // Conseil : use nFixe (by example nMin=nMax=100)
     //    raytracingGM(&matlab);
     //    raytracingCM(&matlab);
     //    raytracingSM(&matlab);
@@ -56,65 +56,65 @@ int mainBrutforce()
 // Private
 // ---------------------------------
 
-void rippling(Matlab *ptrMatlab)
+void rippling(Matlab* ptrMatlab)
     {
     const double DURATION_MAX_S = 0.01; // 0.9 1 grid
     const PlotType PLOT_TYPE = PlotType::ALL_GRAPHE;
 
     RipplingProvider provider;
-    bruteForce<uchar4>((ProviderUse_I *)&provider, ptrMatlab, PLOT_TYPE, DURATION_MAX_S);
+    bruteForce<uchar4>((ProviderUse_I*)&provider, ptrMatlab, PLOT_TYPE, DURATION_MAX_S);
     }
 
-void mandelbrot(Matlab *ptrMatlab)
+void mandelbrot(Matlab* ptrMatlab)
     {
     const double DURATION_MAX_S = 0.4; // 1 grid
     const PlotType PLOT_TYPE = PlotType::ALL_GRAPHE;
 
     MandelbrotProvider provider;
-    bruteForce<uchar4>((ProviderUse_I *)&provider, ptrMatlab, PLOT_TYPE, DURATION_MAX_S);
+    bruteForce<uchar4>((ProviderUse_I*)&provider, ptrMatlab, PLOT_TYPE, DURATION_MAX_S);
     }
 
-void raytracingGM(Matlab *ptrMatlab)
+void raytracingGM(Matlab* ptrMatlab)
     {
     const double DURATION_MAX_S = 0.9; // 1 grid
     const PlotType PLOT_TYPE = PlotType::ALL_GRAPHE;
 
     RaytracingProviderGM provider;
-    bruteForce<uchar4>((ProviderUse_I *)&provider, ptrMatlab, PLOT_TYPE, DURATION_MAX_S);
+    bruteForce<uchar4>((ProviderUse_I*)&provider, ptrMatlab, PLOT_TYPE, DURATION_MAX_S);
     }
 
-void raytracingSM(Matlab *ptrMatlab)
+void raytracingSM(Matlab* ptrMatlab)
     {
     const double DURATION_MAX_S = 0.9; // 1 grid
     const PlotType PLOT_TYPE = PlotType::ALL_GRAPHE;
 
     RaytracingProviderSM provider;
-    bruteForce<uchar4>((ProviderUse_I *)&provider, ptrMatlab, PLOT_TYPE, DURATION_MAX_S);
+    bruteForce<uchar4>((ProviderUse_I*)&provider, ptrMatlab, PLOT_TYPE, DURATION_MAX_S);
     }
 
-void raytracingCM(Matlab *ptrMatlab)
+void raytracingCM(Matlab* ptrMatlab)
     {
     const double DURATION_MAX_S = 0.9; // 1 grid
     const PlotType PLOT_TYPE = PlotType::ALL_GRAPHE;
 
     RaytracingProviderCM provider;
-    bruteForce<uchar4>((ProviderUse_I *)&provider, ptrMatlab, PLOT_TYPE, DURATION_MAX_S);
+    bruteForce<uchar4>((ProviderUse_I*)&provider, ptrMatlab, PLOT_TYPE, DURATION_MAX_S);
     }
 
-void raytracingCM2SM(Matlab *ptrMatlab)
+void raytracingCM2SM(Matlab* ptrMatlab)
     {
     const double DURATION_MAX_S = 0.9; // 1 grid
     const PlotType PLOT_TYPE = PlotType::ALL_GRAPHE;
 
     RaytracingProviderCM2SM provider;
-    bruteForce<uchar4>((ProviderUse_I *)&provider, ptrMatlab, PLOT_TYPE, DURATION_MAX_S);
+    bruteForce<uchar4>((ProviderUse_I*)&provider, ptrMatlab, PLOT_TYPE, DURATION_MAX_S);
     }
 
 // ---------------------------------
 // Tools
 // ---------------------------------
 
-template <typename T> void bruteForce(ProviderUse_I *ptrProviderUse, Matlab *ptrMatlab, const PlotType &plotType, double durationMaxS)
+template <typename T> void bruteForce(ProviderUse_I* ptrProviderUse, Matlab* ptrMatlab, const PlotType& plotType, double durationMaxS)
     {
     // Hardware
     const int MP = Hardware::getMPCount();

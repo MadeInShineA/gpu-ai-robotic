@@ -24,6 +24,11 @@ namespace mandelbrot
             const int MP = Hardware::getMPCount();
             const int CORE_MP = Hardware::getCoreCountMP();
 
+            dim3 dg{MP, 2, 1};
+            dim3 db{CORE_MP, 4, 1};
+
+            return Grid(dg, db);
+
 // fp64 (float 64 bits)
 #ifdef MANDELBROT_DOUBLE
                 // TODO Mandelbrot

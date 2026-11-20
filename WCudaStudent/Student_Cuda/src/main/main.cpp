@@ -28,7 +28,7 @@ int main(int argc, char** argv)
 
         // public
         {
-        cudaContext.deviceId = 2;                     //  in [0,2] width Server Cuda3
+        cudaContext.deviceId = 1;                     //  in [0,2] width Server Cuda3
         cudaContext.launchMode = LaunchModeMOO::TEST; // USE TEST  BENCHMARK  FORCEBRUT
 
         cudaContext.deviceDriver = DeviceDriver::LOAD_ALL; // LOAD_CURRENT   LOAD_ALL

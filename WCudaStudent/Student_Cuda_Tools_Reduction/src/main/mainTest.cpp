@@ -30,8 +30,8 @@ int mainTest()
     {
     // activer ci-dessous seulement le TP voulu (pas tous)
 
-    add();
-    // generic();
+    // add();
+    generic();
 
     return EXIT_SUCCESS;
     }
@@ -48,7 +48,7 @@ void add()
     VTReductionAddIntI test1;
     VTReductionAddIntII test2;
 
-    test1.run();
+    // test1.run();
     // test2.run();
     }
 

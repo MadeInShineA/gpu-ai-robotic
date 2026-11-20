@@ -11,7 +11,7 @@ using std::endl;
 // Extern
 // --------------------------------------------------------------------------------------
 
-extern int mainImage(const Args &args);
+extern int mainImage(const Args& args);
 extern int mainBenchmark();
 extern int mainBrutforce();
 extern int mainTest();
@@ -20,14 +20,14 @@ extern int mainTest();
 // Implementations
 // --------------------------------------------------------------------------------------
 
-int main(int argc, char **argv)
+int main(int argc, char** argv)
     {
     CudaContextImage cudaContext;
 
         // public
         {
-        cudaContext.deviceId = 2;                        //  in [0,2] width Server Cuda3
-        cudaContext.launchMode = LaunchModeImage::IMAGE; // IMAGE  BENCHMARKING    BRUTFORCE TESTING
+        cudaContext.deviceId = 1;                          //  in [0,2] width ServerjjCuda3
+        cudaContext.launchMode = LaunchModeImage::TESTING; // IMAGE  BENCHMARKING    BRUTFORCE TESTING
 
         cudaContext.deviceDriver = DeviceDriver::LOAD_CURRENT; // LOAD_CURRENT   LOAD_ALL
         cudaContext.deviceInfo = DeviceInfo::ALL_SIMPLE;       // NONE  ALL  ALL_SIMPLE  CURRENT

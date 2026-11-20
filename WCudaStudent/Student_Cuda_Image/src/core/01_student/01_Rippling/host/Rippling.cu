@@ -13,13 +13,13 @@ using std::endl;
 // Extern
 // --------------------------------------------------------------------------------------
 
-extern __global__ void rippling(uchar4 *tabPixelsGM, uint w, uint h, float t);
+extern __global__ void rippling(uchar4* tabPixelsGM, uint w, uint h, float t);
 
 // --------------------------------------------------------------------------------------
 // Constructors
 // --------------------------------------------------------------------------------------
 
-Rippling::Rippling(const Grid &grid, uint w, uint h, float dt, bool isVerbose)
+Rippling::Rippling(const Grid& grid, uint w, uint h, float dt, bool isVerbose)
     : Animable_I<uchar4>(grid, w, h, "Rippling-Cuda-uchar4", isVerbose) // super classe
     {
         // specific rippling
@@ -50,13 +50,12 @@ Rippling::~Rippling()
  *
  * Note : domaineMath pas use car image pas zoomable
  */
-void Rippling::process(uchar4 *tabPixelsGM, uint w, uint h, const DomaineMath &domaineMath)
+void Rippling::process(uchar4* tabPixelsGM, uint w, uint h, const DomaineMath& domaineMath)
     {
     // TODO Rippling
     // lancer le kernel avec <<<dg,db>>>
     // le kernel est importer ci-dessus (ligne 19)
-
-    assert(false); // to delete once implement
+    rippling<<<this->dg, this->db>>>(tabPixelsGM, w, h, this->t);
     }
 
 /**

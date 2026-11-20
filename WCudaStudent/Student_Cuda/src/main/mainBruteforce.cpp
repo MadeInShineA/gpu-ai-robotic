@@ -33,29 +33,29 @@ using std::string;
 // --------------------------------------------------------------------------------------
 
 // Slice
-static void sliceGMHOST(Matlab *ptrMatlab);
-static void sliceGM(Matlab *ptrMatlab);
-static void sliceSM(Matlab *ptrMatlab);
-static void sliceMulti(Matlab *ptrMatlab);
+static void sliceGMHOST(Matlab* ptrMatlab);
+static void sliceGM(Matlab* ptrMatlab);
+static void sliceSM(Matlab* ptrMatlab);
+static void sliceMulti(Matlab* ptrMatlab);
 
 // Montecarlo
-static void montecarloMono(Matlab *ptrMatlab);
-static void montecarloThread(Matlab *ptrMatlab);
-static void montecarloStream(Matlab *ptrMatlab);
+static void montecarloMono(Matlab* ptrMatlab);
+static void montecarloThread(Matlab* ptrMatlab);
+static void montecarloStream(Matlab* ptrMatlab);
 
 // Vector Stream
-static void addvector(Matlab *ptrMatlab);
-static void addvectorBistream(Matlab *ptrMatlab);
-static void addvectorTristream(Matlab *ptrMatlab);
-static void addvectorTristream1a(Matlab *ptrMatlab);
-static void addvectorTristream1b(Matlab *ptrMatlab);
-static void addvectorTristream2a(Matlab *ptrMatlab);
-static void addvectorTristream2b(Matlab *ptrMatlab);
-static void addvectorTristreamDebug(Matlab *ptrMatlab);
+static void addvector(Matlab* ptrMatlab);
+static void addvectorBistream(Matlab* ptrMatlab);
+static void addvectorTristream(Matlab* ptrMatlab);
+static void addvectorTristream1a(Matlab* ptrMatlab);
+static void addvectorTristream1b(Matlab* ptrMatlab);
+static void addvectorTristream2a(Matlab* ptrMatlab);
+static void addvectorTristream2b(Matlab* ptrMatlab);
+static void addvectorTristreamDebug(Matlab* ptrMatlab);
 
 // Tools
-static void bruteforce(ProviderUse_I *ptrProviderUse, Matlab *ptrMatlab, const PlotType &plotType, double durationMaxS);
-static void bruteforceReduction(ProviderUse_I *ptrProviderUse, Matlab *ptrMatlab, const PlotType &plotType, double durationMaxS);
+static void bruteforce(ProviderUse_I* ptrProviderUse, Matlab* ptrMatlab, const PlotType& plotType, double durationMaxS);
+static void bruteforceReduction(ProviderUse_I* ptrProviderUse, Matlab* ptrMatlab, const PlotType& plotType, double durationMaxS);
 
 // --------------------------------------------------------------------------------------
 //  Implementations
@@ -69,17 +69,17 @@ int mainBrutforce()
 
         // Slice
         {
-        sliceGMHOST(&matlab);
+        // sliceGMHOST(&matlab);
         //	sliceGM(&matlab);
-        //	sliceSM(&matlab);
+        sliceSM(&matlab);
         //	sliceMulti(&matlab);
         }
 
         // Montecarlo
         {
-            //	montecarloMono(&matlab); // lent en long
-            //	montecarloThread(&matlab);
-            //	montecarloStream(&matlab);
+        //	montecarloMono(&matlab); // lent en long
+        //	montecarloThread(&matlab);
+        //	montecarloStream(&matlab);
         }
 
         // vector
@@ -98,7 +98,7 @@ int mainBrutforce()
 //  Private
 // ---------------------------------
 
-void sliceGMHOST(Matlab *ptrMatlab)
+void sliceGMHOST(Matlab* ptrMatlab)
     {
     const double DURATION_MAX_S = 0.9;
     const PlotType PLOT_TYPE = PlotType::ALL_GRAPHE;
@@ -108,7 +108,7 @@ void sliceGMHOST(Matlab *ptrMatlab)
     bruteforce(&provider, ptrMatlab, PLOT_TYPE, DURATION_MAX_S);
     }
 
-void sliceGM(Matlab *ptrMatlab)
+void sliceGM(Matlab* ptrMatlab)
     {
     const double DURATION_MAX_S = 0.9;
     const PlotType PLOT_TYPE = PlotType::ALL_GRAPHE;
@@ -132,7 +132,7 @@ void sliceGM(Matlab *ptrMatlab)
         }
     }
 
-void sliceSM(Matlab *ptrMatlab)
+void sliceSM(Matlab* ptrMatlab)
     {
     const double DURATION_MAX_S = 0.9;
     const PlotType PLOT_TYPE = PlotType::ALL_GRAPHE;
@@ -142,7 +142,7 @@ void sliceSM(Matlab *ptrMatlab)
     bruteforceReduction(&provider, ptrMatlab, PLOT_TYPE, DURATION_MAX_S);
     }
 
-void sliceMulti(Matlab *ptrMatlab)
+void sliceMulti(Matlab* ptrMatlab)
     {
     const double DURATION_MAX_S = 0.9;
     const PlotType PLOT_TYPE = PlotType::ALL_GRAPHE;
@@ -152,7 +152,7 @@ void sliceMulti(Matlab *ptrMatlab)
     bruteforceReduction(&provider, ptrMatlab, PLOT_TYPE, DURATION_MAX_S);
     }
 
-void montecarloMono(Matlab *ptrMatlab)
+void montecarloMono(Matlab* ptrMatlab)
     {
 #ifdef DAR_INT
     const double DURATION_MAX_S = 0.9;
@@ -169,7 +169,7 @@ void montecarloMono(Matlab *ptrMatlab)
     bruteforceReduction(&provider, ptrMatlab, PLOT_TYPE, DURATION_MAX_S);
     }
 
-void montecarloThread(Matlab *ptrMatlab)
+void montecarloThread(Matlab* ptrMatlab)
     {
 #ifdef DAR_INT
     const double DURATION_MAX_S = 0.9;
@@ -186,7 +186,7 @@ void montecarloThread(Matlab *ptrMatlab)
     bruteforceReduction(&provider, ptrMatlab, PLOT_TYPE, DURATION_MAX_S);
     }
 
-void montecarloStream(Matlab *ptrMatlab)
+void montecarloStream(Matlab* ptrMatlab)
     {
 #ifdef DAR_INT
     const double DURATION_MAX_S = 0.9;
@@ -203,7 +203,7 @@ void montecarloStream(Matlab *ptrMatlab)
     bruteforceReduction(&provider, ptrMatlab, PLOT_TYPE, DURATION_MAX_S);
     }
 
-void addvector(Matlab *ptrMatlab)
+void addvector(Matlab* ptrMatlab)
     {
     const double DURATION_MAX_S = 0.9;
     const PlotType PLOT_TYPE = PlotType::ALL_GRAPHE;
@@ -213,7 +213,7 @@ void addvector(Matlab *ptrMatlab)
     bruteforce(&provider, ptrMatlab, PLOT_TYPE, DURATION_MAX_S);
     }
 
-void addvectorBistream(Matlab *ptrMatlab)
+void addvectorBistream(Matlab* ptrMatlab)
     {
     const double DURATION_MAX_S = 0.9;
     const PlotType PLOT_TYPE = PlotType::ALL_GRAPHE;
@@ -231,7 +231,7 @@ void addvectorBistream(Matlab *ptrMatlab)
  * Selon le cas il faut changer la taille du vecteur dans VectorTools.cpp, VectorTools::n()
  * Why? On veut se simplifier la vie, et pourvoir avoir des slices de tranches égales
  */
-void addvectorTristream(Matlab *ptrMatlab)
+void addvectorTristream(Matlab* ptrMatlab)
     {
     // addvectorTristream1a(ptrMatlab);
     addvectorTristream1b(ptrMatlab);
@@ -244,7 +244,7 @@ void addvectorTristream(Matlab *ptrMatlab)
 /**
  * cas 1.a : #slice : 3 4 5 6 7 8 9 10 11 12 13 14 15
  */
-void addvectorTristream1a(Matlab *ptrMatlab)
+void addvectorTristream1a(Matlab* ptrMatlab)
     {
     const double DURATION_MAX_S = 0.9;
     const PlotType PLOT_TYPE = PlotType::ALL_GRAPHE;
@@ -259,7 +259,7 @@ void addvectorTristream1a(Matlab *ptrMatlab)
 /**
  * cas 1.b : #slice in [5,75] par pas de 5
  */
-void addvectorTristream1b(Matlab *ptrMatlab)
+void addvectorTristream1b(Matlab* ptrMatlab)
     {
     const double DURATION_MAX_S = 0.9;
     const PlotType PLOT_TYPE = PlotType::ALL_GRAPHE;
@@ -275,7 +275,7 @@ void addvectorTristream1b(Matlab *ptrMatlab)
 /**
  * cas 2.a : #slice  : 10 20 30 40 50
  */
-void addvectorTristream2a(Matlab *ptrMatlab)
+void addvectorTristream2a(Matlab* ptrMatlab)
     {
     const double DURATION_MAX_S = 0.9;
     const PlotType PLOT_TYPE = PlotType::ALL_GRAPHE;
@@ -291,7 +291,7 @@ void addvectorTristream2a(Matlab *ptrMatlab)
 /**
  * cas 2.b : #slice  : 10 100 1000 10000 20000 30000 40000
  */
-void addvectorTristream2b(Matlab *ptrMatlab)
+void addvectorTristream2b(Matlab* ptrMatlab)
     {
     const double DURATION_MAX_S = 0.9;
     const PlotType PLOT_TYPE = PlotType::ALL_GRAPHE;
@@ -316,7 +316,7 @@ void addvectorTristream2b(Matlab *ptrMatlab)
         }
     }
 
-void addvectorTristreamDebug(Matlab *ptrMatlab)
+void addvectorTristreamDebug(Matlab* ptrMatlab)
     {
     const double DURATION_MAX_S = 0.9;
     const PlotType PLOT_TYPE = PlotType::ALL_GRAPHE;
@@ -334,7 +334,7 @@ void addvectorTristreamDebug(Matlab *ptrMatlab)
 /**
  * db power2
  */
-void bruteforceReduction(ProviderUse_I *ptrProviderUse, Matlab *ptrMatlab, const PlotType &plotType, double durationMaxS)
+void bruteforceReduction(ProviderUse_I* ptrProviderUse, Matlab* ptrMatlab, const PlotType& plotType, double durationMaxS)
     {
     // Hardware
     const int MP = Hardware::getMPCount();
@@ -355,7 +355,7 @@ void bruteforceReduction(ProviderUse_I *ptrProviderUse, Matlab *ptrMatlab, const
     BruteForce::run(ptrProviderUse, &gridMaillage, ptrMatlab, plotType, durationMaxS);
     }
 
-void bruteforce(ProviderUse_I *ptrProviderUse, Matlab *ptrMatlab, const PlotType &plotType, double durationMaxS)
+void bruteforce(ProviderUse_I* ptrProviderUse, Matlab* ptrMatlab, const PlotType& plotType, double durationMaxS)
     {
     // Hardware
     const int MP = Hardware::getMPCount();

@@ -23,13 +23,12 @@ namespace rippling
             const int MP = Hardware::getMPCount();
             const int CORE_MP = Hardware::getCoreCountMP();
 
-                // TODO Rippling
+            dim3 dg = {MP, 1, 1};
+            dim3 db = {CORE_MP, 4, 1};
 
-                // to remove once coded
-                {
-                Couts::redln("aie aie aie, your best grid won t build itself");
-                assert(false);
-                }
+            Grid grid(dg, db);
+
+            return grid;
             }
         };
     } // namespace rippling

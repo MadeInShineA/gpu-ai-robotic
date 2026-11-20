@@ -55,13 +55,13 @@ int mainTest()
 void slice()
     {
     // VTSliceGMHOST test1;
-    VTSliceGM test2;
-    // VTSliceSM test3;
+    // VTSliceGM test2;
+    VTSliceSM test3;
     // VTSliceMulti test4;
 
     // test1.run();
-    test2.run();
-    // test3.run();
+    // test2.run();
+    test3.run();
     // test4.run();
     }
 

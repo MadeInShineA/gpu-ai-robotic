@@ -14,19 +14,20 @@ using std::to_string;
 //  Externs
 // --------------------------------------------------------------------------------------
 
-extern __global__ void sliceSM(int nbSlice, float *ptrPiHatGM);
+extern __global__ void sliceSM(int nbSlice, float* ptrPiHatGM);
 
 // --------------------------------------------------------------------------------------
 // Constructors
 // --------------------------------------------------------------------------------------
 
-SliceSM::SliceSM(const Grid &grid, int nbSlice, double *ptrPiHat, bool isVerbose)
+SliceSM::SliceSM(const Grid& grid, int nbSlice, double* ptrPiHat, bool isVerbose)
     : RunnableGPU(grid, "SliceSM_" + to_string(nbSlice), isVerbose), // classe parente
                                                                      //
       ptrPiHat(ptrPiHat),                                            //
       nbSlice(nbSlice)                                               //
     {
-    this->sizeSM = -1; // TODO SliceSM
+    this->sizeSM = sizeof(float) * grid.threadByBlock(); // TODO SliceSM
+    GM::mallocFloat0(&ptrPiHatGM);
 
         // MM
         {
@@ -41,6 +42,7 @@ SliceSM::SliceSM(const Grid &grid, int nbSlice, double *ptrPiHat, bool isVerbose
 SliceSM::~SliceSM(void)
     {
     // TODO SliceSM
+    GM::free(ptrPiHatGM);
     }
 
 // --------------------------------------------------------------------------------------
@@ -56,6 +58,14 @@ void SliceSM::run()
     // Solution : double result; // et ramener dans result, transferer et finaliser ensuite dans ptrPiHat
 
     // TODO SliceSM
+    sliceSM<<<grid.dg, grid.db, this->sizeSM>>>(nbSlice, ptrPiHatGM);
+
+    float result;
+    GM::memcpyDToH_float(&result, ptrPiHatGM);
+
+    result = result * (1.0f / float(this->nbSlice));
+
+    *this->ptrPiHat = double(result);
     }
 
 /////////////////////////

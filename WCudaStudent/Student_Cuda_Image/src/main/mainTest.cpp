@@ -31,8 +31,8 @@ int mainTest()
     {
     // activer ci-dessous seulement le TP voulu (pas tous)
 
-    rippling();
-    // mandelbrot(); // fp16 only
+    // rippling();
+    mandelbrot(); // fp16 only
     // raytracing(); // voir code ci-dessous pour activer la version voulue
 
     return EXIT_SUCCESS;
